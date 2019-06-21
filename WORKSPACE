@@ -11,7 +11,7 @@ http_archive(
 http_archive(
     name = "io_bazel_rules_rust",
     sha256 = "29d9fc1cdbd737c51db5983d1ac8e64cdc684c4683bafbcc624d3d81de92a32f",
-    strip_prefix = "rules_rust-8417c8954efbd0cefc8dd84517b2afff5e907d5a",
+    strip_prefix = "rulio.github.microutils:kotlin-logginges_rust-8417c8954efbd0cefc8dd84517b2afff5e907d5a",
     urls = ["https://github.com/bazelbuild/rules_rust/archive/8417c8954efbd0cefc8dd84517b2afff5e907d5a.tar.gz"],
 )
 

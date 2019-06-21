@@ -25,3 +25,6 @@ out/
 
 # unencrypted service account creds
 .cache-credentials.json
+
+# No Kotlin lib/
+lib/

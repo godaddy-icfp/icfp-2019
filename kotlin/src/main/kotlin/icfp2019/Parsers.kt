@@ -1,21 +1,30 @@
 package icfp2019
 
 import com.google.common.base.CharMatcher
+import mu.KotlinLogging
 
 /*
-  A class for which has Input -> Expression and a set of utilties for parsing the edges
+  A class used for creating arbitrary parsers of Input
  */
 class Parsers(expression: String) {
+  val logger = KotlinLogging.logger {  }
+  companion object {
+    val logger = KotlinLogging.logger {  }
+  }
+
   val matcher: CharMatcher
   init {
+    logger.trace{"Calling... Parser() $expression"}
     this.matcher = CharMatcher.anyOf(expression)
   }
 
-  public fun parsePoint(mapEdges: String): Point {
+  fun parsePoint(mapEdges: String): Point {
+    logger.debug{"Calling... parsePoint() $mapEdges"}
     return parseEdges(mapEdges)[0]
   }
 
-  fun parseEdges(mapEdges: String): List<Point> {
+  private fun parseEdges(mapEdges: String): List<Point> {
+    logger.trace{"Calling... parseEdges() $mapEdges"}
     return mapEdges.split(',')
             .map { this.matcher.trimFrom(it) }
             .windowed(2)
