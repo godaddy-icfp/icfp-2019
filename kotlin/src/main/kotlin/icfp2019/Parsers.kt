@@ -23,7 +23,7 @@ class Parsers(expression: String) {
     return parseEdges(mapEdges)[0]
   }
 
-  private fun parseEdges(mapEdges: String): List<Point> {
+  fun parseEdges(mapEdges: String): List<Point> {
     logger.trace{"Calling... parseEdges() $mapEdges"}
     return mapEdges.split(',')
             .map { this.matcher.trimFrom(it) }
