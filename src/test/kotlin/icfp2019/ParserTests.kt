@@ -24,6 +24,6 @@ fun testFullFile() {
       "#X(9,19);L(17,13);F(5,6);F(13,19);F(14,4);B(16,18);B(5,8)"
 
   val problem = ProblemDescription(ProblemId(34), testInput)
-  val p = parseDesc(problem)
+  parseDesc(problem)
 }
 

@@ -21,11 +21,11 @@ fun main() {
 }
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
-  TODO("not implemented")
+  TODO(workingDir.toString() + solutions.toString() + "not implemented");
 }
 
 fun readZipFile(file: File): List<ProblemDescription> {
-  TODO("not implemented")
+  TODO(file.toString() + "not implemented")
 }
 
 enum class Boosters {
@@ -55,8 +55,10 @@ fun parseDesc(problem: ProblemDescription): Problem {
   val (mapEdges, startPosition, obstacles, boosters) = problem.line.split('#')
   val startPoint = parsePoint(startPosition)
   val verticies = parseEdges(mapEdges)
+  @Suppress("UNUSED_VARIABLE")
   val obstacleEdges = parseEdges(obstacles)
-  val parsedBosters = parseBoosters(boosters)
+  @Suppress("UNUSED_VARIABLE")
+  val parsedBoosters = parseBoosters(boosters)
 
   val maxY = verticies.maxBy { it.y }?.y ?: throw RuntimeException()
   val maxX = verticies.maxBy { it.x }?.x ?: throw RuntimeException()
@@ -70,9 +72,6 @@ fun parseDesc(problem: ProblemDescription): Problem {
   verticies.forEach {
     grid[it.x][it.y] = grid[it.x][it.y].copy(isObstacle = false)
   }
-
-
-
 
 
   // Read lines
@@ -92,6 +91,7 @@ fun parseDesc(problem: ProblemDescription): Problem {
   return Problem(problem.problemId, startPoint, arrayOf())
 }
 
+@Suppress("UNUSED_PARAMETER")
 fun parseBoosters(boosters: String): List<Boosters> {
   return listOf()
 }
