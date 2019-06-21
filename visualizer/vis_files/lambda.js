@@ -1,4 +1,6 @@
 var render, validate;
+var xMax = 0;
+var yMax = 0;
 (function() {
     'use strict';
     'use strict';
@@ -2872,9 +2874,12 @@ var render, validate;
         return 0 === (4 & a.q) << 24 >> 24 ? wg(a) : a.Fl
     }
 
+
     // Translate coordinate
     function Dg(a, b) {
         if (null !== b) {
+            if (xMax < b.k) {xMax = b.k};
+            if (yMax < b.l) {yMax = b.l};
             var c = b.k;
             b = b.l;
             var e = xg(a);
@@ -5213,6 +5218,10 @@ var render, validate;
             }
         }(a, c)));
         Eg(c, b.Sf, Gg().Zj)
+
+        document.getElementById('sizeX').insertAdjacentHTML('afterbegin', xMax);
+        document.getElementById('sizeY').insertAdjacentHTML('afterbegin', yMax);
+
         c.ac.strokeStyle = "#FF0000";
         for (var lx = 0; lx < 250; lx += 1) {
           c.ac.beginPath();
@@ -5781,10 +5790,6 @@ var render, validate;
         a.op.textContent = "" + a.gc
     }
 
-    function drawGrid() {
-
-    }
-
     // RENDER METHOD HERE
     function mm(a, b) {
         b = za(b.result);
@@ -5810,7 +5815,6 @@ var render, validate;
                         Xl(W(), W().xg, (W(),
                         Gg().vg));
                         cm(W(), a, e);
-                        drawGrid();
                         Vl(W())
                     } catch (l) {
                         if (c = qe(Q(), l),
