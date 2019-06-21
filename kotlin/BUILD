@@ -14,7 +14,7 @@ kt_jvm_test(
     srcs = glob(["src/test/kotlin/**/*.kt"]),
     deps = [
         ":misfits",
-        "@jake//:org_junit_jupiter_junit_jupiter_api",
+        "@maven//:org_junit_jupiter_junit_jupiter_api",
         # "//path/to/dependency",
     ],
 )

@@ -2,10 +2,10 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "io_bazel_rules_kotlin",
-    urls = ["https://github.com/cgruber/rules_kotlin/archive/cde63912cbb6fa88262392e695f59500fb3b1309.zip"],
-    sha256 = "654eba643e1cd6a62c689519abfe1b0d553d84dec7c296f0b12a73c5c9bdd115",
+    urls = ["https://github.com/bazelbuild/rules_kotlin/archive/990fcc53689c8b58b3229c7f628f843a60cb9f5c.zip"],
+    sha256 = "51f86a66c0affd7a9a63a44d061a154da37c8771f3b8daa8f51b150903b4d797",
     type = "zip",
-    strip_prefix = "rules_kotlin-cde63912cbb6fa88262392e695f59500fb3b1309"
+    strip_prefix = "rules_kotlin-990fcc53689c8b58b3229c7f628f843a60cb9f5c"
 )
 
 http_archive(
@@ -45,7 +45,7 @@ http_archive(
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
-    name = "jake",
+    name = "maven",
     artifacts = [
         "com.google.code.findbugs:jsr305:1.3.9",
         "com.google.errorprone:error_prone_annotations:2.0.18",
