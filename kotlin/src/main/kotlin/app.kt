@@ -4,10 +4,10 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 fun main() {
-  val workingDir: Any = Paths.get("")
+  val workingDir: Path = Paths.get("")
   val problem = parseDesc(File(""))
   val solution = solve(problem)
-  writeSolution(solution, File(System))
+  writeSolution(solution, workingDir)
 }
 
 enum class Boosters {
