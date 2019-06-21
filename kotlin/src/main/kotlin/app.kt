@@ -4,18 +4,36 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 fun main() {
-  val workingDir: Path = Paths.get("")
 
-  val solutions = mutableListOf<Solution>()
-  readZipFile(File("problems.zip"))
-      .filter { it.file.isFile }
-      .forEach {
-        val problem = parseDesc(it)
-        val solution = solve(problem)
-        encodeSolution(solution, workingDir)
-      }
+    ZipFile("/Users/cmach/Downloads/part-1-initial.zip").use { zip ->
+        zip.entries().asSequence().forEach { entry ->
+            zip.getInputStream(entry).use { input ->
+                println("Problem: " + entry.name)
 
-  writeZip(workingDir, solutions)
+                val content = File(entry.name).readText()
+
+                val parts = content.split("#")
+                val map = parts[0]
+                val position = parts[1]
+                val obstacles = parts[2]
+                val boosters = parts[3]
+
+                println("############### MAP ################")
+                println(map)
+                println("############### POSITION ################")
+                println(position)
+                println("############### OBSTACLE ################")
+                println(obstacles)
+                println("############### BOOSTERS ################")
+                println(boosters)
+
+                //val problem = parseDesc(it)
+                //val solution = solve(problem)
+                //encodeSolution(solution, workingDir)
+                //writeZip(workingDir, solutions)
+            }
+        }
+    }
 }
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
