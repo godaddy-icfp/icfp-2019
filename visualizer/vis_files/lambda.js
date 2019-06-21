@@ -2871,6 +2871,8 @@ var render, validate;
     function Cg(a) {
         return 0 === (4 & a.q) << 24 >> 24 ? wg(a) : a.Fl
     }
+
+    // Translate coordinate
     function Dg(a, b) {
         if (null !== b) {
             var c = b.k;
@@ -2900,6 +2902,8 @@ var render, validate;
         b = Fg(Gg().Hf);
         a.fillStyle = b
     }
+
+    // Draw a Path
     function Hg(a, b, c) {
         xg(a);
         b = b.sa;
@@ -5210,6 +5214,8 @@ var render, validate;
         }(a, c)));
         Eg(c, b.Sf, Gg().Zj)
     }
+
+    // Rectangle fill (not used during during map draw)
     function dm(a) {
         var b = em(a)
           , c = Fg(Gg().Hf);
@@ -5734,6 +5740,8 @@ var render, validate;
         } else
             a.Dc = A()
     }
+
+    // WRITE SOME AREA IN MAP
     function Xl(a, b, c) {
         var e = em(a)
           , f = Fg(Gg().Hf);
@@ -5755,6 +5763,12 @@ var render, validate;
         a.q |= 8);
         a.op.textContent = "" + a.gc
     }
+
+    function drawGrid() {
+
+    }
+
+    // RENDER METHOD HERE
     function mm(a, b) {
         b = za(b.result);
         if (b === W().re)
@@ -5779,6 +5793,7 @@ var render, validate;
                         Xl(W(), W().xg, (W(),
                         Gg().vg));
                         cm(W(), a, e);
+                        drawGrid();
                         Vl(W())
                     } catch (l) {
                         if (c = qe(Q(), l),
@@ -14329,7 +14344,7 @@ var render, validate;
     xu.prototype.constructor = xu;
     d = xu.prototype;
     d.pa = function() {
-        return "InstallTele"
+        return ""
     }
     ;
     d.na = function() {
