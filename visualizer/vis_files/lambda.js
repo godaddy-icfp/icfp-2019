@@ -5222,28 +5222,42 @@ var yMax = 0;
         document.getElementById('sizeX').insertAdjacentHTML('afterbegin', xMax);
         document.getElementById('sizeY').insertAdjacentHTML('afterbegin', yMax);
 
-        c.ac.strokeStyle = "#FF0000";
-        c.ac.fillStyle = "#FF0000";
-        for (var lx = 0; lx < 250; lx += 1) {
+        c.ac.strokeStyle = "#AA0000";
+        c.ac.fillStyle = "#AAA";
+        var colSkip = 1;
+        if (xMax > 10) {
+            colSkip = 10;
+        }
+        if (xMax > 100) {
+            colSkip = 50;
+        }
+        var rowSkip = 1;
+        if (yMax > 10) {
+            rowSkip = 10;
+        }
+        if (yMax > 100) {
+            rowSkip = 50;
+        }
+        for (var lx = 0; lx < xMax + 1; lx += 1) {
           c.ac.beginPath();
           x = Dg(c, new uf(lx, 0));
-          y = Dg(c, new uf(lx, 250));
+          y = Dg(c, new uf(lx, yMax));
           c.ac.moveTo(x.k, x.l);
           c.ac.lineTo(y.k, y.l);
           c.ac.stroke();
-          if (lx % 10 == 0) {
-            c.ac.fillText(lx, x.k, x.l);
+          if (lx % colSkip == 0) {
+            c.ac.fillText(lx, x.k+10, x.l+10);
           }
         }
-        for (var lx = 0; lx < 250; lx += 1) {
+        for (var lx = 0; lx < yMax + 1; lx += 1) {
           c.ac.beginPath();
           x = Dg(c, new uf(0, lx));
-          y = Dg(c, new uf(250, lx));
+          y = Dg(c, new uf(xMax, lx));
           c.ac.moveTo(x.k, x.l);
           c.ac.lineTo(y.k, y.l);
           c.ac.stroke();
-          if (lx % 10 == 0) {
-            c.ac.fillText(lx, x.k, x.l);
+          if (lx % rowSkip == 0) {
+            c.ac.fillText(lx, x.k+10, x.l+10c);
           }
         }
     }
