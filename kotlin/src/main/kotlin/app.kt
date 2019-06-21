@@ -1,3 +1,91 @@
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
 fun main() {
-  println("Hello World!")
+  val workingDir: Any = Paths.get("")
+  val problem = parseDesc(File(""))
+  val solution = solve(problem)
+  writeSolution(solution, File(System))
+}
+
+enum class Boosters {
+ B, F, L, X
+}
+
+data class Point(val x: Int, val y:Int)
+data class Node(val point: Point, val is_obstacle: Boolean, val booster: Boosters)
+
+data class ProblemId(val id: Int)
+data class Problem(val problemId: ProblemId, val map: Array<Array<Node>>)
+
+/*
+Task:
+ 1. Open Zip file
+ 2. parse a problem at a time: prob_NNN.desc
+ 3. solve problem
+ 4. encode solution
+ 5. output to file prob_NNN.sol (use checker to validate?) https://icfpcontest2019.github.io/solution_checker/
+ 6. add solution to another zip (script/program)
+ */
+
+fun parseDesc(file: File): Problem {
+  // Read lines
+  /*
+  1. Read lines
+  2. Parse map
+  Grammar:
+    x,y: Nat
+              point ::= (x,y)
+                map ::= repSep(point,”,”)
+        BoosterCode ::= B|F|L|X
+    boosterLocation ::= BoosterCode point
+          obstacles ::= repSep(map,”; ”)
+           boosters ::= repSep(boosterLocation,”; ”)
+               task ::= map # point # obstacles # boosters
+   */
+  return arrayOf<Array<Node>>()
+}
+
+/*
+A solution for a task
+  prob-NNN.desc
+is a sequence of actions encoded as a single-line text file named
+  prob-NNN.sol
+for the corresponding numberNNN.
+The actions are encoded as follows:
+  action ::=
+      W(move up)
+      | S(move down)
+      | A(move left)
+      | D(move right)
+      | Z(do nothing)
+      | E(turn manipulators 90°clockwise)
+      | Q(turn manipulators 90°counterclockwise)
+      | B(dx,dy)(attach a new manipulator with relative coordinates(dx,dy))
+      | F(attach fast wheels)
+      | L(start using a drill)
+
+  solution ::= rep(action)
+
+  A solution isvalid, if it does not force the worker-wrapper to go through the walls and obstacles
+  (unless it uses a drill), respects the rules of using boosters, and, upon finishing,
+  leaves all reachablesquares of the map wrapped.
+ */
+
+enum class Actions {
+  W, S, A, D, Z, E, Q, B, F, L
+}
+
+data class Solution(val problemId: ProblemId, val actions: List<Actions>)
+
+fun solve(problem: Problem) : Solution {
+  return Solution(problem.problemId, listOf())
+}
+
+fun writeSolution(solution: Solution, directory: Path): File {
+  val file = Files.createFile(directory.resolve("prob-${solution.problemId.id}.sol"))
+  // TODO
+  return file.toFile()
 }
