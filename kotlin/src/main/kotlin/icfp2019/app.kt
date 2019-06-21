@@ -6,36 +6,22 @@ import java.nio.file.Path
 import java.util.zip.ZipFile
 
 fun main() {
+    val problems = Problems()
+    problems.init("/Users/cmach/Downloads/part-1-initial.zip")
 
-    ZipFile("/part-1-initial.zip").use { zip ->
-        zip.entries().asSequence().forEach { entry ->
-            zip.getInputStream(entry).use { input ->
-                println("Problem: " + entry.name)
+    val vertixes  = problems.getProblem("prob-114.desc")[0]
+    val position  = problems.getProblem("prob-114.desc")[1]
+    val obstacle  = problems.getProblem("prob-114.desc")[2]
+    val boosters  = problems.getProblem("prob-114.desc")[3]
 
-                val content = File(entry.name).readText()
-
-                val parts = content.split("#")
-                val map = parts[0]
-                val position = parts[1]
-                val obstacles = parts[2]
-                val boosters = parts[3]
-
-                println("############### MAP ################")
-                println(map)
-                println("############### POSITION ################")
-                println(position)
-                println("############### OBSTACLE ################")
-                println(obstacles)
-                println("############### BOOSTERS ################")
-                println(boosters)
-
-                //val problem = parseDesc(it)
-                //val solution = solve(problem)
-                //encodeSolution(solution, workingDir)
-                //writeZip(workingDir, solutions)
-            }
-        }
-    }
+    println("############### MAP ################")
+    println(vertixes)
+    println("############### POSITION ################")
+    println(position)
+    println("############### OBSTACLE ################")
+    println(obstacle)
+    println("############### BOOSTERS ################")
+    println(boosters)
 }
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
