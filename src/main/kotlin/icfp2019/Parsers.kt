@@ -27,15 +27,22 @@ fun parseDesc(problem: ProblemDescription): Problem {
 
   val maxY = verticies.maxBy { it.y }?.y ?: throw RuntimeException()
   val maxX = verticies.maxBy { it.x }?.x ?: throw RuntimeException()
+  println("$maxX,$maxY")
 
-  val grid = (0..maxX).map { x ->
-    (0..maxY).map { y ->
+  val grid = (0.until(maxX)).map { x ->
+    (0.until(maxY)).map { y ->
       Node(Point(x, y), isObstacle = true, booster = null)
     }.toTypedArray()
   }.toTypedArray()
 
   verticies.forEach {
-    grid[it.x][it.y] = grid[it.x][it.y].copy(isObstacle = false)
+    val x  = it.x;
+    val y = it.y
+    println("$x,$y")
+    if (x < maxX && y < maxY) {
+      var xRow = grid[x]
+      xRow[y] = xRow[y].copy(isObstacle = false)
+    }
   }
 
   val xGroups = verticies.groupBy { it.x }.mapValues {
@@ -50,8 +57,8 @@ fun parseDesc(problem: ProblemDescription): Problem {
   }
 
   var inObstacle = true
-  (0..maxX).forEach { x ->
-    (0..maxY).forEach { y ->
+  (0 until maxX).forEach { x ->
+    (0 until maxY).forEach { y ->
       if (xGroups[x]?.contains(y) == true) {
         inObstacle = !inObstacle
       }

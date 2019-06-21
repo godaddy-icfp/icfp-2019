@@ -25,10 +25,21 @@ class ParserTests {
     val problem = ProblemDescription(ProblemId(3), problem3Input)
     val p = parseDesc(problem)
 
+    p.map[4].forEach { x ->
+      print(if (x.isObstacle) {
+        'X'
+      } else {
+        '.'
+      })
+    }
 
 
-    p.size.x.downTo(0).forEach { x ->
-      0.rangeTo(p.size.y).forEach { y ->
+    println()
+    println("===================")
+
+
+    (p.size.x - 1).downTo(0).forEach { x ->
+      0.until(p.size.y).forEach { y ->
         print(if (p.map[x][y].isObstacle) {
           'X'
         } else {
