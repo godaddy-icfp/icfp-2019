@@ -5,9 +5,25 @@ import java.nio.file.Paths
 
 fun main() {
   val workingDir: Path = Paths.get("")
-  val problem = parseDesc(File(""))
-  val solution = solve(problem)
-  writeSolution(solution, workingDir)
+
+  val solutions = mutableListOf<Solution>()
+  readZipFile(File("problems.zip"))
+      .filter { it.file.isFile }
+      .forEach {
+        val problem = parseDesc(it)
+        val solution = solve(problem)
+        encodeSolution(solution, workingDir)
+      }
+
+  writeZip(workingDir, solutions)
+}
+
+fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
+  TODO("not implemented")
+}
+
+fun readZipFile(file: File): List<ProblemDescription> {
+  TODO("not implemented")
 }
 
 enum class Boosters {
@@ -15,10 +31,11 @@ enum class Boosters {
 }
 
 data class Point(val x: Int, val y: Int)
-data class Node(val point: Point, val is_obstacle: Boolean, val booster: Boosters)
+data class Node(val point: Point, val isObstacle: Boolean, val booster: Boosters)
 
 data class ProblemId(val id: Int)
-data class Problem(val problemId: ProblemId, val map: Array<Array<Node>>)
+data class ProblemDescription(val problemId: ProblemId, val file: File)
+data class Problem(val problemId: ProblemId, val startingPosition: Point, val map: Array<Array<Node>>)
 
 /*
 Task:
@@ -30,7 +47,7 @@ Task:
  6. add solution to another zip (script/program)
  */
 
-fun parseDesc(file: File): Problem {
+fun parseDesc(file: ProblemDescription): Problem {
   // Read lines
   /*
   1. Read lines
@@ -45,7 +62,7 @@ fun parseDesc(file: File): Problem {
            boosters ::= repSep(boosterLocation,”; ”)
                task ::= map # point # obstacles # boosters
    */
-  return Problem(ProblemId(0), arrayOf())
+  return Problem(ProblemId(0), Point(0, 0), arrayOf())
 }
 
 /*
@@ -84,7 +101,7 @@ fun solve(problem: Problem): Solution {
   return Solution(problem.problemId, listOf())
 }
 
-fun writeSolution(solution: Solution, directory: Path): File {
+fun encodeSolution(solution: Solution, directory: Path): File {
   val file = Files.createFile(directory.resolve("prob-${solution.problemId.id}.sol"))
   // TODO
   return file.toFile()
