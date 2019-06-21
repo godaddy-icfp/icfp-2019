@@ -2,18 +2,14 @@ package icfp2019
 
 import com.google.common.base.CharMatcher
 import icfp2019.logging.DEBUG
-import icfp2019.logging.INFO
 import icfp2019.logging.TRACE
-import mu.KotlinLogging
+import mu.KLogging
 
 /*
   A class used for creating arbitrary parsers of Input
  */
 class Parsers(expression: String) {
-  val logger = KotlinLogging.logger {  }
-  companion object {
-    val logger = KotlinLogging.logger {  }
-  }
+  companion object : KLogging()
 
   val matcher: CharMatcher
   init {
