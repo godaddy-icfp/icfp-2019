@@ -11,10 +11,10 @@ fun main() {
 }
 
 enum class Boosters {
- B, F, L, X
+  B, F, L, X
 }
 
-data class Point(val x: Int, val y:Int)
+data class Point(val x: Int, val y: Int)
 data class Node(val point: Point, val is_obstacle: Boolean, val booster: Boosters)
 
 data class ProblemId(val id: Int)
@@ -45,7 +45,7 @@ fun parseDesc(file: File): Problem {
            boosters ::= repSep(boosterLocation,”; ”)
                task ::= map # point # obstacles # boosters
    */
-  return arrayOf<Array<Node>>()
+  return Problem(ProblemId(0), arrayOf())
 }
 
 /*
@@ -80,7 +80,7 @@ enum class Actions {
 
 data class Solution(val problemId: ProblemId, val actions: List<Actions>)
 
-fun solve(problem: Problem) : Solution {
+fun solve(problem: Problem): Solution {
   return Solution(problem.problemId, listOf())
 }
 
