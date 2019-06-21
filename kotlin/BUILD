@@ -6,6 +6,7 @@ kt_jvm_binary(
     srcs = glob(["src/main/kotlin/**/*.kt"]),
     deps = [
         "@maven//:com_google_guava_guava",
+        "@maven//:io_github_microutils_kotlin_logging",
         # "//path/to/dependency",
     ],
 )
