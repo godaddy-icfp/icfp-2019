@@ -5,20 +5,28 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-fun main() {
-  val workingDir: Path = Paths.get("")
-
-  val solutions = mutableListOf<Solution>()
-  readZipFile(File("problems.zip"))
-      .filter { it.line.isNotEmpty() }
-      .forEach {
-        val problem = parseDesc(it)
-        val solution = solve(problem)
-        encodeSolution(solution, workingDir)
-      }
-
-  writeZip(workingDir, solutions)
+class MisfitsApp {
+  companion object {
+    @JvmStatic fun main(args: Array<String>) {
+      println("Hello")
+    }
+  }
 }
+
+//fun main() {
+//  val workingDir: Path = Paths.get("")
+//
+//  val solutions = mutableListOf<Solution>()
+//  readZipFile(File("problems.zip"))
+//      .filter { it.line.isNotEmpty() }
+//      .forEach {
+//        val problem = parseDesc(it)
+//        val solution = solve(problem)
+//        encodeSolution(solution, workingDir)
+//      }
+//
+//  writeZip(workingDir, solutions)
+//}
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
   TODO("not implemented")

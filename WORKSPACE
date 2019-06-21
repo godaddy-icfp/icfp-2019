@@ -74,6 +74,7 @@ maven_install(
         "org.junit.jupiter:junit-jupiter-engine:%s" % JUNIT_JUPITER_VERSION,
         "com.google.guava:guava:28.0-jre",
         "org.junit.platform:junit-platform-console:%s" % JUNIT_PLATFORM_VERSION,
+        "io.github.microutils:kotlin-logging:1.6.26"
     ],
     repositories = [
         "https://jcenter.bintray.com/",
