@@ -1,6 +1,9 @@
 package icfp2019
 
 import com.google.common.base.CharMatcher
+import icfp2019.logging.DEBUG
+import icfp2019.logging.INFO
+import icfp2019.logging.TRACE
 import mu.KotlinLogging
 
 /*
@@ -14,17 +17,17 @@ class Parsers(expression: String) {
 
   val matcher: CharMatcher
   init {
-    logger.trace{"Calling... Parser() $expression"}
+    logger.trace{TRACE + "Calling... Parser() $expression"}
     this.matcher = CharMatcher.anyOf(expression)
   }
 
   fun parsePoint(mapEdges: String): Point {
-    logger.debug{"Calling... parsePoint() $mapEdges"}
+    logger.debug{DEBUG + "Calling... parsePoint() $mapEdges"}
     return parseEdges(mapEdges)[0]
   }
 
   fun parseEdges(mapEdges: String): List<Point> {
-    logger.trace{"Calling... parseEdges() $mapEdges"}
+    logger.trace{DEBUG + "Calling... parseEdges() $mapEdges"}
     return mapEdges.split(',')
             .map { this.matcher.trimFrom(it) }
             .windowed(2)
