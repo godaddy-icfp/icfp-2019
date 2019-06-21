@@ -15,5 +15,6 @@ and you can find the [problem specification here](https://icfpcontest2019.github
   * find the WORKSPACE file in the git repo root, click next
   * select `Create from scratch` for the "project view"
   * change project name to `icfp2019`, click finish
+  * go to the Bazel MENU item and check `Sync Project With BUILD Files`
 
 

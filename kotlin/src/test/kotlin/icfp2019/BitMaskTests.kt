@@ -1,6 +1,8 @@
 package icfp2019
 
 import icfp2019.external.*
+import org.junit.jupiter.api.Test
+
 
 enum class ParameterFeature(override val bit: Long) : Flags {
     Undefined(0),
@@ -14,14 +16,22 @@ enum class ParameterFeature(override val bit: Long) : Flags {
 
 @Test
 fun testBitMask(args : Array<String>){
-    val mask: BitMask = ParameterFeature.Path +
+    val enabled: BitMask = ParameterFeature.Path +
             ParameterFeature.Query +
-            ParameterFeature.Header;
+            ParameterFeature.Header
 
-    val enabled = enabledValues<ParameterFeature>(mask)
+    val disabled = enumValues<ParameterFeature>().filterNot { enabled.contains(it) }
+
+    val expectedDisabled = List<ParameterFeature>(
+            ParameterFeature.Undefined,
+            ParameterFeature.Body,
+            ParameterFeature.FormUnencoded,
+            ParameterFeature.FormMultipart).map(it -> it.name)
 
     println("flags enabled: $enabled")
-    println("flags disabled: ${enumValues<ParameterFeature>().filterNot { enabled.contains(it) } }")
-    println("mask hasFlag ParameterFeature.Query: ${mask hasFlag ParameterFeature.Query}")
-    println("mask hasFlag ParameterFeature.Body: ${mask hasFlag ParameterFeature.Body}")
+    println("flags disabled: $disabled")
+
+    Assertions.assertEquals(result, disabled)
+    println("mask hasFlag ParameterFeature.Query: ${enabled hasFlag ParameterFeature.Query}")
+    println("mask hasFlag ParameterFeature.Body: ${enabled hasFlag ParameterFeature.Body}")
 }
