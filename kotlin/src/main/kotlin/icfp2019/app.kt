@@ -137,21 +137,32 @@ fun constructObstacleMap(problem: Problem): Array<Array<Boolean>> {
     val rowSize = problem.map.size
     val colSize = problem.map.get(0).size
     // Create a Array of Array map for the given problem with
-    val rowObstacle = Array<Array<Boolean>>(rowSize){}
+    val rowObstacle = Array(rowSize) {i -> Array(colSize) {j -> false}}
     val row = problem.map
     for (i in row.indices) {
-        val colObstacle = Array<Boolean>(colSize){}
+        val colObstacle = Array(colSize){ i -> false}
         val col = row.get(i)
         for (j in col.indices) {
             val node = col[j]
             if (node.isObstacle) {
                 colObstacle.set(j,true)
             }
-            colObstacle.set(j, false)
         }
         rowObstacle.set(i,colObstacle)
     }
     return rowObstacle
+}
+
+
+fun constructBoosterMap(problem: Problem): Array<Array<Boosters>> {
+    val rowSize = problem.map.size
+    val colSize = problem.map.get(0).size
+    val rowBooster = Array<Array<Boosters>>(rowSize){}
+    val row = problem.map
+    for (i in row.indices) {
+
+    }
+    return rowBooster;
 }
 
 fun encodeSolution(solution: Solution, directory: Path): File {
