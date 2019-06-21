@@ -13,10 +13,11 @@ class Problems {
     fun run() {
         ZipFile(path).use { zip ->
             zip.entries().asSequence().forEach { entry ->
-                //println("Problem: " + entry.name)
-                zip.getInputStream(entry).use { input ->
-                    val content = File(entry.name).readText()
-                    problemMap.put(entry.name, content)
+                if(entry.name.endsWith(".desc")) {
+                    zip.getInputStream(entry).use { input ->
+                        val content = File(entry.name).readText()
+                        problemMap.put(entry.name, content)
+                    }
                 }
             }
         }
