@@ -1,4 +1,6 @@
 var render, validate;
+var xMax = 0;
+var yMax = 0;
 (function() {
     'use strict';
     'use strict';
@@ -2871,8 +2873,13 @@ var render, validate;
     function Cg(a) {
         return 0 === (4 & a.q) << 24 >> 24 ? wg(a) : a.Fl
     }
+
+
+    // Translate coordinate
     function Dg(a, b) {
         if (null !== b) {
+            if (xMax < b.k) {xMax = b.k};
+            if (yMax < b.l) {yMax = b.l};
             var c = b.k;
             b = b.l;
             var e = xg(a);
@@ -2900,6 +2907,8 @@ var render, validate;
         b = Fg(Gg().Hf);
         a.fillStyle = b
     }
+
+    // Draw a Path
     function Hg(a, b, c) {
         xg(a);
         b = b.sa;
@@ -5209,24 +5218,51 @@ var render, validate;
             }
         }(a, c)));
         Eg(c, b.Sf, Gg().Zj)
-        c.ac.strokeStyle = "#FF0000";
-        for (var lx = 0; lx < 250; lx += 1) {
+
+        document.getElementById('sizeX').insertAdjacentHTML('afterbegin', xMax);
+        document.getElementById('sizeY').insertAdjacentHTML('afterbegin', yMax);
+
+        c.ac.strokeStyle = "#AA0000";
+        c.ac.fillStyle = "#AAA";
+        var colSkip = 1;
+        if (xMax > 10) {
+            colSkip = 10;
+        }
+        if (xMax > 100) {
+            colSkip = 50;
+        }
+        var rowSkip = 1;
+        if (yMax > 10) {
+            rowSkip = 10;
+        }
+        if (yMax > 100) {
+            rowSkip = 50;
+        }
+        for (var lx = 0; lx < xMax + 1; lx += 1) {
           c.ac.beginPath();
           x = Dg(c, new uf(lx, 0));
-          y = Dg(c, new uf(lx, 250));
+          y = Dg(c, new uf(lx, yMax));
           c.ac.moveTo(x.k, x.l);
           c.ac.lineTo(y.k, y.l);
           c.ac.stroke();
+          if (lx % colSkip == 0) {
+            c.ac.fillText(lx, x.k+10, x.l+10);
+          }
         }
-        for (var lx = 0; lx < 250; lx += 1) {
+        for (var lx = 0; lx < yMax + 1; lx += 1) {
           c.ac.beginPath();
           x = Dg(c, new uf(0, lx));
-          y = Dg(c, new uf(250, lx));
+          y = Dg(c, new uf(xMax, lx));
           c.ac.moveTo(x.k, x.l);
           c.ac.lineTo(y.k, y.l);
           c.ac.stroke();
+          if (lx % rowSkip == 0) {
+            c.ac.fillText(lx, x.k+10, x.l+10);
+          }
         }
     }
+
+    // Rectangle fill (not used during during map draw)
     function dm(a) {
         var b = em(a)
           , c = Fg(Gg().Hf);
@@ -5751,6 +5787,8 @@ var render, validate;
         } else
             a.Dc = A()
     }
+
+    // WRITE SOME AREA IN MAP
     function Xl(a, b, c) {
         var e = em(a)
           , f = Fg(Gg().Hf);
@@ -5772,6 +5810,8 @@ var render, validate;
         a.q |= 8);
         a.op.textContent = "" + a.gc
     }
+
+    // RENDER METHOD HERE
     function mm(a, b) {
         b = za(b.result);
         if (b === W().re)
@@ -14346,7 +14386,7 @@ var render, validate;
     xu.prototype.constructor = xu;
     d = xu.prototype;
     d.pa = function() {
-        return "InstallTele"
+        return ""
     }
     ;
     d.na = function() {
