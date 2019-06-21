@@ -8,25 +8,20 @@ import java.nio.file.Paths
 class MisfitsApp {
   companion object {
     @JvmStatic fun main(args: Array<String>) {
-      println("Hello")
+      val workingDir: Path = Paths.get("")
+      val solutions = mutableListOf<Solution>()
+      readZipFile(File("problems.zip"))
+          .filter { it.line.isNotEmpty() }
+          .forEach {
+            val problem = parseDesc(it)
+            val solution = solve(problem)
+            encodeSolution(solution, workingDir)
+          }
+
+      writeZip(workingDir, solutions)
     }
   }
 }
-
-//fun main() {
-//  val workingDir: Path = Paths.get("")
-//
-//  val solutions = mutableListOf<Solution>()
-//  readZipFile(File("problems.zip"))
-//      .filter { it.line.isNotEmpty() }
-//      .forEach {
-//        val problem = parseDesc(it)
-//        val solution = solve(problem)
-//        encodeSolution(solution, workingDir)
-//      }
-//
-//  writeZip(workingDir, solutions)
-//}
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
   TODO("not implemented")
@@ -59,12 +54,18 @@ Task:
 
 
 fun parseDesc(problem: ProblemDescription): Problem {
+  // A Specific Parser for Input of vertices
+  val parser = Parsers("()")
 
+  // Split accordingly
   val (mapEdges, startPosition, obstacles, boosters) = problem.line.split('#')
-  val startPoint = parsePoint(startPosition)
-  val verticies = parseEdges(mapEdges)
-  val obstacleEdges = parseEdges(obstacles)
-  val parsedBosters = parseBoosters(boosters)
+
+
+  val startPoint = parser.parsePoint(startPosition)
+  val verticies = parser.parseEdges(mapEdges)
+
+//  val obstacleEdges = parseEdges(obstacles)
+//  val parsedBosters = parseBoosters(boosters)
 
   val maxY = verticies.maxBy { it.y }?.y ?: throw RuntimeException()
   val maxX = verticies.maxBy { it.x }?.x ?: throw RuntimeException()
