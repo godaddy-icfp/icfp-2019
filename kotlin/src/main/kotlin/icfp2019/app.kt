@@ -7,7 +7,7 @@ import java.util.zip.ZipFile
 
 fun main() {
 
-    ZipFile("/Users/cmach/Downloads/part-1-initial.zip").use { zip ->
+    ZipFile("/part-1-initial.zip").use { zip ->
         zip.entries().asSequence().forEach { entry ->
             zip.getInputStream(entry).use { input ->
                 println("Problem: " + entry.name)
