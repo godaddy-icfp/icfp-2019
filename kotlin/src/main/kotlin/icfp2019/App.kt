@@ -10,7 +10,7 @@ fun main() {
 
   val solutions = mutableListOf<Solution>()
   readZipFile(File("problems.zip"))
-      .filter { it.file.isFile }
+      .filter { it.line.isNotEmpty() }
       .forEach {
         val problem = parseDesc(it)
         val solution = solve(problem)
@@ -28,44 +28,10 @@ fun readZipFile(file: File): List<ProblemDescription> {
   TODO("not implemented")
 }
 
-enum class Boosters {
-  B, F, L, X
+fun parseBoosters(boosters: String): List<Boosters> {
+  return listOf()
 }
 
-data class Point(val x: Int, val y: Int)
-data class Node(val point: Point, val isObstacle: Boolean, val booster: Boosters)
-
-data class ProblemId(val id: Int)
-data class ProblemDescription(val problemId: ProblemId, val file: File)
-data class Problem(val problemId: ProblemId, val startingPosition: Point, val map: Array<Array<Node>>)
-
-/*
-Task:
- 1. Open Zip file
- 2. parse a problem at a time: prob_NNN.desc
- 3. solve problem
- 4. encode solution
- 5. output to file prob_NNN.sol (use checker to validate?) https://icfpcontest2019.github.io/solution_checker/
- 6. add solution to another zip (script/program)
- */
-
-fun parseDesc(file: ProblemDescription): Problem {
-  // Read lines
-  /*
-  1. Read lines
-  2. Parse map
-  Grammar:
-    x,y: Nat
-              point ::= (x,y)
-                map ::= repSep(point,”,”)
-        BoosterCode ::= B|F|L|X
-    boosterLocation ::= BoosterCode point
-          obstacles ::= repSep(map,”; ”)
-           boosters ::= repSep(boosterLocation,”; ”)
-               task ::= map # point # obstacles # boosters
-   */
-  return Problem(ProblemId(0), Point(0, 0), arrayOf())
-}
 
 /*
 A solution for a task
