@@ -1,4 +1,4 @@
-package icfp2019.TransactionEngine
+package icfp2019.transaction.engine
 
 import com.google.common.collect.ImmutableMap
 
