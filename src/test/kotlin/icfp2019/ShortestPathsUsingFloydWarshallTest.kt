@@ -37,7 +37,7 @@ class ShortestPathsUsingFloydWarshallTest {
         )
 
         val graph = ShortestPathUsingFlyodWarshall
-            .analyze(gameBoard)(GameState(gameBoard, listOf(), listOf(), listOf()))
+            .analyze(gameBoard)(GameState.empty(Point(0, 0)))
             .getPath(Node(Point(0, 0), false),
                 Node(Point(2, 1), false))
 
