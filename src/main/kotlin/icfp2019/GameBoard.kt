@@ -31,23 +31,23 @@ data class GameBoard(
         }
     }
 
-    fun isInBoard(x: Int, y: Int): Boolean {
-        return (x >= 0 && x < width && y >= 0 && y < height)
+    fun isInBoard(point: Point): Boolean {
+        return (point.x >= 0 && point.x < width && point.y >= 0 && point.y < height)
     }
 
-    fun get(x: Int, y: Int): Short {
-        if (!isInBoard(x, y)) {
+    fun get(point: Point): Short {
+        if (!isInBoard(point)) {
             throw ArrayIndexOutOfBoundsException("Access out of game board")
         }
-        return cells[x * height + y]
+        return cells[point.x * height + point.y]
     }
 
-    fun set(x: Int, y: Int, value: Short): GameBoard {
-        if (!isInBoard(x, y)) {
+    fun set(point: Point, value: Short): GameBoard {
+        if (!isInBoard(point)) {
             throw ArrayIndexOutOfBoundsException("Access out of game board")
         }
         val newCells = cells.clone()
-        newCells[x * height + y] = value
+        newCells[point.x * height + point.y] = value
         return GameBoard(newCells, width, height)
     }
 
@@ -55,8 +55,7 @@ data class GameBoard(
 
     fun rows() : List<List<Short>> {
         return (0 until height).map { y ->
-            (0 until width).map { x -> get(x, y)}
+            (0 until width).map { x -> get(Point(x, y)) }
         }
     }
-
 }
