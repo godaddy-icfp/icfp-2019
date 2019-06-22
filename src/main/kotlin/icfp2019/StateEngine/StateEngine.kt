@@ -6,7 +6,7 @@ class GameState {}
 class RobotId {}
 class Action {}
 
-class StateEngine(_actionMap: ImmutableMap<RobotId, Action>) {
+class GameEngine(_actionMap: ImmutableMap<RobotId, Action>) {
   val actionMap: ImmutableMap<RobotId, Action> = _actionMap
     get() = field
 
