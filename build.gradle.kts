@@ -16,6 +16,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(platform("org.junit:junit-bom:5.4.0"))
 
+    implementation("org.jgrapht:jgrapht-core:1.3.0")
     implementation("com.google.guava:guava:28.0-jre")
     implementation("org.junit.jupiter:junit-jupiter")
     implementation("org.junit.jupiter:junit-jupiter-api")
