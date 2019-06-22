@@ -1,7 +1,6 @@
 package icfp2019
 
 import java.io.File
-import java.util.zip.ZipFile
 import kotlin.properties.Delegates
 
 class Problems(path: String) {
