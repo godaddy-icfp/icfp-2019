@@ -39,7 +39,7 @@ class GetNumberOfWrappedOrNotTests {
         Assertions.assertEquals(2, columns[1].size)
         Assertions.assertEquals(2, columns[2].size)
 
-        val results = GetNumberOfWrappedOrNot.analyze(g)(GameState.empty)
+        val results = GetNumberOfWrappedOrNot.analyze(g)(GameState.empty(Point(0, 0)))
         Assertions.assertEquals(2, results.wrapped)
         Assertions.assertEquals(4, results.unwrapped)
     }
