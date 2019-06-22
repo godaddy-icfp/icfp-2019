@@ -24,9 +24,10 @@ class TransitionEngine {
             Point(robotState.currentPosition.x, newY)
         )
 
-        val x = robotState.currentPosition.x
-        val y = robotState.currentPosition.y
-        val board = gameState.gameBoard.set(x, y, Cell.setFlag(gameState.gameBoard.get(x, y), Cell.WRAPPED))
+        val board = gameState.gameBoard.set(
+            robotState.currentPosition,
+            gameState.gameBoard.get(robotState.currentPosition).copy(isWrapped = true)
+        )
 
         return GameState(board, listOf(newRobotState), listOf(), listOf())
     }
@@ -40,9 +41,10 @@ class TransitionEngine {
             Point(robotState.currentPosition.x, newY)
         )
 
-        val x = robotState.currentPosition.x
-        val y = robotState.currentPosition.y
-        val board = gameState.gameBoard.set(x, y, Cell.setFlag(gameState.gameBoard.get(x, y), Cell.WRAPPED))
+        val board = gameState.gameBoard.set(
+            robotState.currentPosition,
+            gameState.gameBoard.get(robotState.currentPosition).copy(isWrapped = true)
+        )
 
         return GameState(board, listOf(newRobotState), listOf(), listOf())
     }
@@ -56,9 +58,10 @@ class TransitionEngine {
             Point(newX, robotState.currentPosition.y)
         )
 
-        val x = robotState.currentPosition.x
-        val y = robotState.currentPosition.y
-        val board = gameState.gameBoard.set(x, y, Cell.setFlag(gameState.gameBoard.get(x, y), Cell.WRAPPED))
+        val board = gameState.gameBoard.set(
+            robotState.currentPosition,
+            gameState.gameBoard.get(robotState.currentPosition).copy(isWrapped = true)
+        )
 
         return GameState(board, listOf(newRobotState), listOf(), listOf())
     }
@@ -72,9 +75,10 @@ class TransitionEngine {
             Point(newX, robotState.currentPosition.x)
         )
 
-        val x = robotState.currentPosition.x
-        val y = robotState.currentPosition.y
-        val board = gameState.gameBoard.set(x, y, Cell.setFlag(gameState.gameBoard.get(x, y), Cell.WRAPPED))
+        val board = gameState.gameBoard.set(
+            robotState.currentPosition,
+            gameState.gameBoard.get(robotState.currentPosition).copy(isWrapped = true)
+        )
 
         return GameState(board, listOf(newRobotState), listOf(), listOf())
     }
