@@ -32,7 +32,7 @@ class OutputTests {
         actions.add(Action.MoveUp)
         actions.add(Action.MoveRight)
 
-        //Adding two robots
+        // Adding two robots
         val map = mutableMapOf<RobotId, List<Action>>()
         map.put(RobotId(1), actions)
         map.put(RobotId(2), actions)
@@ -50,9 +50,9 @@ class OutputTests {
         actions.add(Action.MoveUp)
         actions.add(Action.MoveUp)
         actions.add(Action.MoveRight)
-        actions.add(Action.TeleportBack(Point(1,2)))
+        actions.add(Action.TeleportBack(Point(1, 2)))
 
-        //Adding two robots
+        // Adding two robots
         val map = mutableMapOf<RobotId, List<Action>>()
         map.put(RobotId(1), actions)
         map.put(RobotId(2), actions)
@@ -70,9 +70,9 @@ class OutputTests {
         actions.add(Action.MoveUp)
         actions.add(Action.MoveUp)
         actions.add(Action.MoveRight)
-        actions.add(Action.AttachManipulator(Point(1,2)))
+        actions.add(Action.AttachManipulator(Point(1, 2)))
 
-        //Adding two robots
+        // Adding two robots
         val map = mutableMapOf<RobotId, List<Action>>()
         map.put(RobotId(1), actions)
         map.put(RobotId(2), actions)
