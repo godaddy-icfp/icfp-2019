@@ -1,37 +1,28 @@
 package icfp2019
 
-import icfp2019.external.*
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 
-enum class ParameterFeature(override val bit: Long) : Flags {
-    Undefined(0),
-    Path(1 shl 0),
-    Query(1 shl 1),
-    Header(1 shl 2),
-    Body(1 shl 3),
-    FormUnencoded(1 shl 4),
-    FormMultipart(1 shl 5);
-}
+class BitMaskTests {
+    @Test
+    fun testBitMask() {
+        val cellValue : Short = 0
 
-@Test
-fun testBitMask(args : Array<String>){
-    val enabled: BitMask = ParameterFeature.Path +
-            ParameterFeature.Query +
-            ParameterFeature.Header
+        val cellValue2 = Cell.setFlag(cellValue, Cell.WALL)
+        Assertions.assertTrue(Cell.hasFlag(cellValue2, Cell.WALL))
 
-    val disabled = enumValues<ParameterFeature>().filterNot { enabled.contains(it) }
+        val cellValue3 = Cell.unsetFlag(cellValue2, Cell.WALL)
+        Assertions.assertFalse(Cell.hasFlag(cellValue3, Cell.WALL))
 
-    val expectedDisabled = List<ParameterFeature>(
-            ParameterFeature.Undefined,
-            ParameterFeature.Body,
-            ParameterFeature.FormUnencoded,
-            ParameterFeature.FormMultipart).map(it -> it.name)
-
-    println("flags enabled: $enabled")
-    println("flags disabled: $disabled")
-
-    Assertions.assertEquals(result, disabled)
-    println("mask hasFlag ParameterFeature.Query: ${enabled hasFlag ParameterFeature.Query}")
-    println("mask hasFlag ParameterFeature.Body: ${enabled hasFlag ParameterFeature.Body}")
+        val cellValue4 = Cell.setFlags(cellValue3, Cell.WALL, Cell.BOOST_DRILL, Cell.MYSTERY, Cell.WRAPPED)
+        Assertions.assertTrue(Cell.hasFlag(cellValue4, Cell.WALL))
+        Assertions.assertTrue(Cell.hasFlag(cellValue4, Cell.WRAPPED))
+        Assertions.assertTrue(Cell.hasFlag(cellValue4, Cell.BOOST_DRILL))
+        Assertions.assertTrue(Cell.hasFlag(cellValue4, Cell.MYSTERY))
+        Assertions.assertFalse(Cell.hasFlag(cellValue4, Cell.BOOST_EXT))
+        Assertions.assertFalse(Cell.hasFlag(cellValue4, Cell.BOOST_TELEPORT))
+        Assertions.assertFalse(Cell.hasFlag(cellValue4, Cell.BOOST_FAST))
+        Assertions.assertFalse(Cell.hasFlag(cellValue4, Cell.BOOST_CLONE))
+    }
 }
