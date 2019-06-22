@@ -9,7 +9,7 @@ class Cell {
         private val ZERO : Short = 0  // This is NOT resprenting and empty cell, it means NO FLAGS, avoid a runtime cast
 
         // Values for cell properties
-        val WALL : Short = 1  // This cell is a wall
+        val OBSTACLE : Short = 1  // This cell is a wall/obstacle
         val WRAPPED : Short = 2  // This cell has been 'wrapped' by the bot
         val MYSTERY : Short = 4  // This cell contains a 'mystery' object
         val BOOST_EXT : Short = 8  // This cell contains an unclaimed extension boost
