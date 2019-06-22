@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class OutputTests {
-    fun getListOfAction(): MutableList<Action> {
-        return mutableListOf(
+    fun getListOfAction(): List<Action> {
+        return listOf(
             Action.MoveDown,
             Action.MoveDown,
             Action.MoveLeft,
@@ -39,12 +39,12 @@ class OutputTests {
     @Test
     fun testOutputOfSolutionWithTeleport() {
         val actions = getListOfAction()
-        actions.add(Action.TeleportBack(Point(1, 2)))
+        val actionPlus = actions.plus(Action.TeleportBack(Point(1, 2)))
 
         // Adding two robots
         val map = mapOf(
-            RobotId(1) to actions,
-            RobotId(2) to actions
+            RobotId(1) to actionPlus,
+            RobotId(2) to actionPlus
         )
 
         val actualOutput = Output.encodeRobotActions(map)
@@ -54,12 +54,12 @@ class OutputTests {
     @Test
     fun testOutputOfSolutionWithManipulator() {
         val actions = getListOfAction()
-        actions.add(Action.AttachManipulator(Point(1, 2)))
+        val actionPlus = actions.plus(Action.AttachManipulator(Point(1, 2)))
 
         // Adding two robots
         val map = mapOf(
-            RobotId(1) to actions,
-            RobotId(2) to actions
+            RobotId(1) to actionPlus,
+            RobotId(2) to actionPlus
         )
 
         val actualOutput = Output.encodeRobotActions(map)
