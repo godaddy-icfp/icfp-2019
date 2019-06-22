@@ -1,8 +1,5 @@
 package icfp2019.model
 
-import icfp2019.model.GameBoard
-import icfp2019.model.Node
-import icfp2019.model.Point
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
