@@ -2,7 +2,6 @@ package icfp2019
 
 import java.lang.IllegalStateException
 import java.util.*
-import kotlin.experimental.and
 
 // Move to an open space and push moves onto a stack, if no moves available then backtrack using the stack
 class BackTrackingStrategy : Strategy {
@@ -79,7 +78,7 @@ class BackTrackingStrategy : Strategy {
             }
         }
 
-        //do we care about the last move so we continue in that direction? would need it first in the list
+        // do we care about the last move so we continue in that direction? would need it first in the list
 
         return moves
     }
