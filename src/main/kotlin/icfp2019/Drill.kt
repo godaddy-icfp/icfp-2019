@@ -7,7 +7,7 @@ fun buildDrillRequiredFromEachNode(problem: Problem): Array<Array<Array<DrillSta
     return currentGrid.mapIndexed { x, row ->
         row.mapIndexed { y, _ ->
             if (!currentGrid[x][y].isObstacle) {
-                arrayOf(DrillState(Direction.U, -1)) // -1
+                arrayOf(DrillState(Direction.E, -1)) // -1
             } else {
                 val rightDir =
                     (x until problem.size.x).map {
