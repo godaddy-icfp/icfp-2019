@@ -1,6 +1,5 @@
 package icfp2019.objects.robot
 
-import icfp2019.Orientation
 import icfp2019.Point
 
 data class RobotState(

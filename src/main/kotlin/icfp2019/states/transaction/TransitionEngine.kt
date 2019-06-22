@@ -7,7 +7,7 @@ import icfp2019.states.actions.Actions
 
 class TransitionEngine {
   // -> Return GameState
-  fun apply(currentGameState: GameState, robotIdMap: ImmutableMap<RobotId, Action>): Nothing {
+  fun apply(currentGameState: GameState, robotIdMap: ImmutableMap<RobotId, Actions>): Nothing {
     // Implement meaningful shit here
     TODO("Implement apply")
   }

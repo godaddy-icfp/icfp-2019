@@ -1,5 +1,6 @@
 package icfp2019
 
+import icfp2019.states.actions.Actions
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -53,13 +54,6 @@ Task:
  5. output to file prob_NNN.sol (use checker to validate?) https://icfpcontest2019.github.io/solution_checker/
  6. add solution to another zip (script/program)
  */
-
-data class GameState(
-    val gameBoard: Array<Short>, // TODO: Martin will replace with GameBoard Builder
-    val robotStateList: List<RobotState>,
-    val teleportDestination: List<Point>,
-    val unusedBoosters: List<Boosters>
-)
 
 data class Solution(val problemId: ProblemId, val actions: List<Actions>)
 
