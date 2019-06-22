@@ -1,17 +1,12 @@
 package icfp2019
 
 data class Point(val x: Int, val y: Int) {
-    fun isNeighbor(otherPoint: Point): Boolean {
-        return listOf(
-            Point(x - 1, y),
-            Point(x + 1, y),
-            Point(x, y - 1),
-            Point(x, y + 1),
-            Point(x - 1, y - 1),
-            Point(x - 1, y + 1),
-            Point(x + 1, y - 1),
-            Point(x + 1, y + 1)
-        ).contains(otherPoint)
+    fun isNeighbor(otherPoint: Point): Boolean = when (otherPoint) {
+        left() -> true
+        right() -> true
+        up() -> true
+        down() -> true
+        else -> false
     }
 
     fun up(): Point {
