@@ -24,7 +24,7 @@ data class GameBoard(
                             else -> flags
                         }
                     }
-                    cells[cell.point.x * problem.size.x + cell.point.y] = flags
+                    cells[cell.point.x * problem.size.y + cell.point.y] = flags
                 }
             }
 
@@ -40,7 +40,7 @@ data class GameBoard(
         if (!isInBoard(x, y)) {
             return Cell.NOT_A_CELL;
         }
-        return cells[x * width + y]
+        return cells[x * height + y]
     }
 
     fun set(x: Int, y: Int, value: Short): GameBoard {
@@ -48,7 +48,7 @@ data class GameBoard(
             return this;
         }
         val newCells = cells.clone()
-        newCells[x * width + y] = value
+        newCells[x * height + y] = value
         return GameBoard(problem, newCells, width, height)
     }
 }
