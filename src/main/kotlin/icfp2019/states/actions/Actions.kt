@@ -1,4 +1,4 @@
-package icfp2019.actions
+package icfp2019.states.actions
 
 enum class Actions(val action: String) {
   W("W"),

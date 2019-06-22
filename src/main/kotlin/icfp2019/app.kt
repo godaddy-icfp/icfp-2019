@@ -54,24 +54,6 @@ Task:
  6. add solution to another zip (script/program)
  */
 
-enum class Actions {
-    W, S, A, D, Z, E, Q, B, F, L
-}
-
-data class RobotState(
-    val robotId: RobotId,
-    val currentPosition: Point,
-    val orientation: Orientation = Orientation.Up,
-    val remainingFastWheelTime: Int? = null,
-    val remainingDrillTime: Int? = null
-)
-
-data class RobotId(val id: Int)
-
-enum class Orientation {
-    Up, Down, Left, Right
-}
-
 data class GameState(
     val gameBoard: Array<Short>, // TODO: Martin will replace with GameBoard Builder
     val robotStateList: List<RobotState>,
