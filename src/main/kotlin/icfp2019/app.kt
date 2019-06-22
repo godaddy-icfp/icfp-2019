@@ -4,6 +4,7 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.*
 
 fun main() {
     val workingDir: Path = Paths.get("")
@@ -83,6 +84,13 @@ The actions are encoded as follows:
 enum class Actions {
     W, S, A, D, Z, E, Q, B, F, L
 }
+
+data class Robots(
+    val robotId: UUID,
+    val currentPosition: Point,
+    val orientation: Int?,
+    val remainingFastWheelTime: Int?,
+    val remainingDrillTime: Int?)
 
 data class Solution(val problemId: ProblemId, val actions: List<Actions>)
 
