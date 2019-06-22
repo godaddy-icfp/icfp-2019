@@ -1,5 +1,9 @@
-package icfp2019
+package icfp2019.analyzers
 
+import icfp2019.GameBoard
+import icfp2019.GameState
+import icfp2019.Node
+import icfp2019.Point
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
@@ -35,8 +39,10 @@ class ShortestPathUsingDijkstraTest {
 
         val graph = ShortestPathUsingDijkstra
             .analyze(gameBoard)(GameState.empty(Point(0, 0)))
-            .getPath(Node(Point(0, 0), false),
-                Node(Point(2, 1), false))
+            .getPath(
+                Node(Point(0, 0), false),
+                Node(Point(2, 1), false)
+            )
 
         Assertions.assertEquals(graph.vertexList, listOf(
             Node(Point(0, 0), false),
