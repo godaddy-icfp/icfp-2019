@@ -6,7 +6,7 @@ import kotlin.experimental.inv
 
 class Cell {
     companion object {
-        private val ZERO: Short = 0 // This is NOT resprenting and empty cell, it means NO FLAGS, avoid a runtime cast
+        val ZERO: Short = 0 // This is NOT representing an empty cell, it means NO FLAGS, avoid a runtime cast
 
         // Values for cell properties
         val OBSTACLE: Short = 1 // This cell is a wall/obstacle
