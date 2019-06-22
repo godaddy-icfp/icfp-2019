@@ -2,9 +2,9 @@ package icfp2019
 
 import org.junit.jupiter.api.Test
 
-class DistanceAlgorithmTests {
+class LongestStraightPathAlgorithmTests {
     @Test
-    fun testDistance() {
+    fun testStraightPath() {
         val problem3Input =
             "(15,23),(16,23),(16,17),(15,17),(15,20),(12,20),(12,19),(10,19),(10,16),(12,16),(12,17),(13,17)," +
                     "(13,14),(14,14),(14,8),(16,8),(16,15),(18,15),(18,0),(27,0),(27,15),(22,15),(22,23),(19,23)," +
@@ -17,17 +17,17 @@ class DistanceAlgorithmTests {
 
         val problem = ProblemParseInput(ProblemId(3), problem3Input)
         val p = parseDesc(problem)
-        val ret = applyDistanceAlgorithm(p.map)
+        val ret = applyLongestStraightPathAlgorithm(p.map)
         printBoard(ret)
     }
 
-    private fun printBoard(map: List<List<Int>>) {
+    private fun printBoard(map: List<List<Pair<Direction, Int>>>) {
         println("${map.size} ${map[0].size}")
         val maxX = map.size
         val maxY = map[0].size
         for (y in (maxY - 1) downTo 0) {
             for (x in 0 until maxX) {
-                print("%02d".format(map[x][y]))
+                print("%s:%02d".format(map[x][y].first.toString(), map[x][y].second))
                 print(' ')
             }
             println()
