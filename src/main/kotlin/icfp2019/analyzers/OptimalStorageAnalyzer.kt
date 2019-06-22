@@ -1,9 +1,9 @@
 package icfp2019.analyzers
 
-import icfp2019.Booster
-import icfp2019.Cell
-import icfp2019.GameBoard
-import icfp2019.GameState
+import icfp2019.model.Booster
+import icfp2019.model.Cell
+import icfp2019.model.GameBoard
+import icfp2019.model.GameState
 import icfp2019.core.Analyzer
 
 object OptimalStorageAnalyzer : Analyzer<Array<Short>> {

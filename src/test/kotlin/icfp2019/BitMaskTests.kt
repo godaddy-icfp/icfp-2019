@@ -1,5 +1,6 @@
 package icfp2019
 
+import icfp2019.model.Cell
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

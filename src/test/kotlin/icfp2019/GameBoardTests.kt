@@ -1,5 +1,8 @@
 package icfp2019
 
+import icfp2019.model.GameBoard
+import icfp2019.model.Node
+import icfp2019.model.Point
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
@@ -36,9 +39,15 @@ class GameBoardTests {
         Assertions.assertEquals(2, columns[0].size)
         Assertions.assertEquals(2, columns[1].size)
         Assertions.assertEquals(2, columns[2].size)
-        Assertions.assertEquals(g.get(Point(0, 0)), Node(Point(0, 0), false))
-        Assertions.assertEquals(g.get(Point(1, 0)), Node(Point(1, 0), false))
-        Assertions.assertEquals(g.get(Point(2, 0)), Node(Point(2, 0), false))
+        Assertions.assertEquals(g.get(Point(0, 0)),
+            Node(Point(0, 0), false)
+        )
+        Assertions.assertEquals(g.get(Point(1, 0)),
+            Node(Point(1, 0), false)
+        )
+        Assertions.assertEquals(g.get(Point(2, 0)),
+            Node(Point(2, 0), false)
+        )
         Assertions.assertEquals(Node(Point(0, 0), false), columns[0][0])
         Assertions.assertEquals(Node(Point(0, 1), false), columns[0][1])
         Assertions.assertEquals(Node(Point(1, 0), false), columns[1][0])

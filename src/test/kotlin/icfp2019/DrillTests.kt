@@ -1,5 +1,7 @@
 package icfp2019
 
+import icfp2019.model.DrillState
+import icfp2019.model.buildDrillRequiredFromEachNode
 import org.junit.jupiter.api.Test
 
 class DrillTests {
