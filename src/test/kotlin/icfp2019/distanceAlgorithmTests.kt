@@ -19,17 +19,16 @@ class DistanceAlgorithmTests {
         val p = parseDesc(problem)
         val ret = applyDistanceAlgorithm(p.map)
         printBoard(ret)
-
     }
 
-    private fun printBoard(map : List<List<Int>>) {
+    private fun printBoard(map: List<List<Int>>) {
         println("${map.size} ${map[0].size}")
         val maxX = map.size
         val maxY = map[0].size
         for (y in (maxY - 1) downTo 0) {
             for (x in 0 until maxX) {
                 print("%02d".format(map[x][y]))
-                print(' ' )
+                print(' ')
             }
             println()
         }
