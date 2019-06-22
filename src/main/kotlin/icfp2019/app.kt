@@ -1,9 +1,11 @@
 package icfp2019
 
 import java.io.File
+import java.nio.file.Paths
 
 fun main(args: Array<String>) {
-    File("/Users/jswenson/sources/personal/icfp-2019/problems/prob-001.desc").walk().forEach {
+    val path = Paths.get(if (args.isNotEmpty()) args[0] else "./problems").toAbsolutePath()
+    path.toFile().walk().forEach {
         if (it.isFile && it.extension.equals("desc")) {
             println("Running " + it.name)
             val problem = parseDesc(it.readText())

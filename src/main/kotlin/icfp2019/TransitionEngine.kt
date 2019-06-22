@@ -5,10 +5,10 @@ class TransitionEngine {
         var currentGameState = gameState
         actions.forEach { x ->
             currentGameState = when (x.value) {
-                MoveDown -> applyMoveDown(x.key, currentGameState)
-                MoveUp -> applyMoveUp(x.key, currentGameState)
-                MoveLeft -> applyMoveLeft(x.key, currentGameState)
-                MoveRight -> applyMoveRight(x.key, currentGameState)
+                Action.MoveDown -> applyMoveDown(x.key, currentGameState)
+                Action.MoveUp -> applyMoveUp(x.key, currentGameState)
+                Action.MoveLeft -> applyMoveLeft(x.key, currentGameState)
+                Action.MoveRight -> applyMoveRight(x.key, currentGameState)
                 else -> throw RuntimeException("Not Impl")
             }
         }
@@ -56,7 +56,6 @@ class TransitionEngine {
             Point(newX, robotState.currentPosition.y)
         )
 
-
         val x = robotState.currentPosition.x
         val y = robotState.currentPosition.y
         val board = gameState.gameBoard.set(x, y, Cell.setFlag(gameState.gameBoard.get(x, y), Cell.WRAPPED))
@@ -72,7 +71,6 @@ class TransitionEngine {
             robotId,
             Point(newX, robotState.currentPosition.x)
         )
-
 
         val x = robotState.currentPosition.x
         val y = robotState.currentPosition.y
