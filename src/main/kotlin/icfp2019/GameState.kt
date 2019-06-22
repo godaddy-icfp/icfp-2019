@@ -6,7 +6,7 @@ data class GameState(
     val unusedBoosters: List<Booster>
 ) {
     companion object {
-        fun empty(startingPoint : Point) =
+        fun empty(startingPoint: Point) =
             GameState(listOf(RobotState(RobotId(0), startingPoint)), listOf(), listOf())
     }
 }
