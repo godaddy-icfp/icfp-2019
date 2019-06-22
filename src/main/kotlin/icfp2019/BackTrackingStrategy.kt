@@ -24,7 +24,7 @@ class BackTrackingStrategy : Strategy {
                         Pair<RobotId, Action>(RobotId(0), backTrackAction)))
                     stack.push(backTrackAction)
                     moveList.add(backTrackAction)
-                    availableMoves = availableMoves(gameState)
+                    availableMoves = availableMoves(currentState)
                 }
             } else {
                 // Else take the first available move
@@ -33,7 +33,7 @@ class BackTrackingStrategy : Strategy {
                     Pair<RobotId, Action>(RobotId(0), action)))
                 stack.push(action)
                 moveList.add(action)
-                availableMoves = availableMoves(gameState)
+                availableMoves = availableMoves(currentState)
             }
         } while (stack.isNotEmpty() || availableMoves.isNotEmpty())
 
@@ -72,7 +72,7 @@ class BackTrackingStrategy : Strategy {
         if (currentPosition.x + 1 < gameState.gameBoard.width) {
             val right = gameState.gameBoard.get(currentPosition.x + 1, currentPosition.y)
             if (!Cell.hasFlag(right, Cell.WRAPPED) && !Cell.hasFlag(right, Cell.OBSTACLE)) {
-                moves.add(MoveUp)
+                moves.add(MoveRight)
             }
         }
 
