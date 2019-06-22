@@ -12,12 +12,20 @@ class GameBoard(_problem: Problem) {
   }
 
   // Used for Flattening Problem 2D array -> 1D of shorts
-  val cells: List<Node>
+  val cells: List<Node> = listOf<Node>()
+    get() = this.problem.map.flatten()
     get() {
       val oneDimenMap = this.problem.map.flatten()
       when(oneDimenMap.isNotEmpty()) {
         true -> return oneDimenMap
-        false -> throw new IllegalStateExcepton("Could not initialize cells with input ${this.problem}")
+        false -> throw IllegalStateExcepton("Could not initialize cells with input ${this.problem}")
       }
     }
+    set(value) {
+      when(value.isNotEmpty()) {
+        true -> field = value
+        false -> throw IllegalStateException("Incorrect input value ${value}")
+      }
+    }
+
 }

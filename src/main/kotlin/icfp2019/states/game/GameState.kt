@@ -1,6 +1,7 @@
 package icfp2019.states.game
 
 import icfp2019.Boosters
+import icfp2019.Node
 import icfp2019.Point
 import icfp2019.Problem
 import icfp2019.objects.gameboard.GameBoard
@@ -19,10 +20,12 @@ class GameState(_problem: Problem) {
     this.problem = _problem
   }
 
-  public val gameBoard: Array<Short>
+  // Array<Short>
+  public val gameBoard: List<Node>
     get() {
-      if(this.problem.map.isNotEmpty()) {
-        return GameBoard(this.problem)
+      when(this.problem.map.isNotEmpty()) {
+        true -> return GameBoard(this.problem).cells
+        false -> IllegalStateException("Problem is not initalized ${this.problem}")
       }
     }
 }
