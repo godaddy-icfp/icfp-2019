@@ -6,39 +6,14 @@ class GameState {}
 class RobotId {}
 class Action {}
 
-class StateEngine {
-//  init {
-//    this.gameState = gameState
-//    this.robotActionMap = robotActionMap
-//  }
+class StateEngine(_actionMap: ImmutableMap<RobotId, Action>) {
+  val actionMap: ImmutableMap<RobotId, Action> = _actionMap
+    get() = field
 
   // -> Return GameState
   fun apply(currentGameState: GameState, robotIdMap: ImmutableMap<RobotId, Action>): Nothing {
     // Implement meaningful shit here
     TODO("Implement apply")
   }
-
-//  val historyOfMapActions : MutableMap<RobotId, List<Action>>
-//    get() {
-//      return this.historyOfMapActions;
-//    }
-
-
-//  val historyMap: ImmutableMap<RobotId, Action>
-//    get() {
-//      val immutableMap = ImmutableMap.of<RobotId, Action>()
-//      when {
-//        this.RobotId.isNotEmpty() -> {
-//          immutableMap.
-//        }
-//        else -> throw IllegalStateException(“The currentMap is empty? ${this.currentMap}“)
-//      }
-//    }
-//
-//  val listOfRobotStates : MutableList<String>
-//    get() {
-//      when(this.currentProblem.)
-//    }
-
 
 }
