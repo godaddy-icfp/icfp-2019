@@ -16,4 +16,9 @@ class StateEngine(_actionMap: ImmutableMap<RobotId, Action>) {
     TODO("Implement apply")
   }
 
+  // Pass in some straegy
+  fun strategy() : Strategies {
+    TODO("Implement something logical")
+  }
+
 }
