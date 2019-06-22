@@ -1,9 +1,6 @@
 package icfp2019
 
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
 
 fun main(args : Array<String>) {
     File(args[0]).walk().forEach {
@@ -18,6 +15,7 @@ fun main(args : Array<String>) {
 
 fun solve(problem: Problem): String {
 //    return Solution(problem)
+    println(problem);
     return "Foo";
 }
 
