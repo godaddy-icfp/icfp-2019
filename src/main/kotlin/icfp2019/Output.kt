@@ -57,8 +57,9 @@ fun toString(action: Action): String = when (action) {
     CloneRobot -> "C"
 }
 
-fun encodeActions(actions: Sequence<Action>): String =
-    actions.map { toString(it) }.joinToString(separator = "")
+fun encodeActions(actions: Iterable<Action>): String =
+    actions.joinToString(separator = "") { toString(it) }
 
-
-fun
+fun encodeRobotActions(robotActions: Map<RobotId, List<Action>>): String =
+    robotActions.entries.sortedBy { it.key.id }
+        .joinToString(separator = "#") { encodeActions(it.value) }
