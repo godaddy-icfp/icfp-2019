@@ -8,7 +8,7 @@ import org.jgrapht.Graph
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.graph.SimpleGraph
 
-class GraphAnalyzer : Analyzer<Graph<Node, DefaultEdge>> {
+object GraphAnalyzer : Analyzer<Graph<Node, DefaultEdge>> {
     override fun analyze(map: GameBoard): (state: GameState) -> Graph<Node, DefaultEdge> {
 
         val simpleGraph = SimpleGraph<Node, DefaultEdge>(DefaultEdge::class.java)

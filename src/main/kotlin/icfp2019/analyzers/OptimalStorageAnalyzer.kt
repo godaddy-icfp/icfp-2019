@@ -6,7 +6,7 @@ import icfp2019.GameBoard
 import icfp2019.GameState
 import icfp2019.core.Analyzer
 
-class OptimalStorageAnalyzer : Analyzer<Array<Short>> {
+object OptimalStorageAnalyzer : Analyzer<Array<Short>> {
     override fun analyze(map: GameBoard): (state: GameState) -> Array<Short> {
         val cells = Array<Short>(map.height * map.width) { 0 }
         for (column in map.cells) {
