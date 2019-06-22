@@ -54,7 +54,6 @@ Task:
  6. add solution to another zip (script/program)
  */
 
-
 enum class Actions {
     W, S, A, D, Z, E, Q, B, F, L
 }
