@@ -25,7 +25,7 @@ class GameState(_problem: Problem) {
     get() {
       when(this.problem.map.isNotEmpty()) {
         true -> return GameBoard(this.problem).cells
-        false -> IllegalStateException("Problem is not initalized ${this.problem}")
+        false -> throw IllegalStateException("Problem is not initalized ${this.problem}")
       }
     }
 }

@@ -12,21 +12,13 @@ class GameBoard(_problem: Problem) {
     this.problem = _problem
   }
 
-  private fun failure(message: String): Nothing {
-    throw IllegalStateException(message)
-  }
-
   // Used for Flattening Problem 2D array -> 1D of shorts
   val cells: List<Node>
     get() {
       val oneDimenMap = this.problem.map.flatten()
       when(oneDimenMap.isNotEmpty()) {
         true -> return oneDimenMap
-        false -> failure("Could not initialize cells with input ${this.problem}")
+        false ->  throw IllegalStateException(("Could not initialize cells with input ${this.problem}")
       }
     }
-
-
-
-
 }
