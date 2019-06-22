@@ -33,7 +33,7 @@ enum class Boosters {
 }
 
 data class Point(val x: Int, val y: Int)
-data class Node(val point: Point, val isObstacle: Boolean, val booster: Boosters?)
+data class Node(val point: Point, val isObstacle: Boolean, val booster: Boosters? = null)
 data class ProblemId(val id: Int)
 data class ProblemDescription(val problemId: ProblemId, val line: String)
 data class Size(val x: Int, val y: Int)
@@ -82,6 +82,20 @@ The actions are encoded as follows:
 
 enum class Actions {
     W, S, A, D, Z, E, Q, B, F, L
+}
+
+data class RobotState(
+    val robotId: RobotId,
+    val currentPosition: Point,
+    val orientation: Orientation = Orientation.Up,
+    val remainingFastWheelTime: Int? = null,
+    val remainingDrillTime: Int? = null
+)
+
+data class RobotId(val id: Int)
+
+enum class Orientation {
+    Up, Down, Left, Right
 }
 
 data class Solution(val problemId: ProblemId, val actions: List<Actions>)
