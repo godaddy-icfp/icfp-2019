@@ -20,8 +20,8 @@ class GameState(_problem: Problem) {
     this.problem = _problem
   }
 
-  // Array<Short>
-  public val gameBoard: List<Node>
+  // TODO: Array<Short>
+  val gameBoard: List<Node>
     get() {
       when(this.problem.map.isNotEmpty()) {
         true -> return GameBoard(this.problem).cells

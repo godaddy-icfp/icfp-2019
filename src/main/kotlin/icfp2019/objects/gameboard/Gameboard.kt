@@ -18,7 +18,7 @@ class GameBoard(_problem: Problem) {
       val oneDimenMap = this.problem.map.flatten()
       when(oneDimenMap.isNotEmpty()) {
         true -> return oneDimenMap
-        false ->  throw IllegalStateException(("Could not initialize cells with input ${this.problem}")
+        false ->  throw IllegalStateException("Could not initialize cells with input ${this.problem}")
       }
     }
 }
