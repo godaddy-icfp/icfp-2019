@@ -3,6 +3,7 @@ package icfp2019.states.game
 import icfp2019.Boosters
 import icfp2019.Point
 import icfp2019.Problem
+import icfp2019.objects.gameboard.GameBoard
 import icfp2019.objects.robot.RobotState
 
 //class GameState(
@@ -12,8 +13,16 @@ import icfp2019.objects.robot.RobotState
 //  val unusedBoosters: List<Boosters>
 //):w
 
-class GameState(problem: Problem) {
-  public val gameBoard: Array<Short> {
-    
+class GameState(_problem: Problem) {
+  val problem : Problem
+  init {
+    this.problem = _problem
   }
+
+  public val gameBoard: Array<Short>
+    get() {
+      if(this.problem.map.isNotEmpty()) {
+        return GameBoard(this.problem)
+      }
+    }
 }
