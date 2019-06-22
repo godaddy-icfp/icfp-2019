@@ -3,11 +3,10 @@ package icfp2019
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-
 class BitMaskTests {
     @Test
     fun testBitMask() {
-        val cellValue : Short = 0
+        val cellValue: Short = 0
 
         val cellValue2 = Cell.setFlag(cellValue, Cell.OBSTACLE)
         Assertions.assertTrue(Cell.hasFlag(cellValue2, Cell.OBSTACLE))
