@@ -5,8 +5,6 @@ import icfp2019.Actions
 import icfp2019.GameState
 import icfp2019.RobotId
 
-
-
 class TransitionEngine {
   // -> Return GameState
   fun apply(currentGameState: GameState, robotIdMap: ImmutableMap<RobotId, Actions>): Nothing {
