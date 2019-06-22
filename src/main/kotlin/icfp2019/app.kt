@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
             println("Running " + it.name)
             val problem = parseDesc(it.readText())
             val solution = solve(problem)
-            File(it.nameWithoutExtension + ".sol").writeBytes(solution.toByteArray())
+            File("./problems/" + it.nameWithoutExtension + ".sol").writeBytes(solution.toByteArray())
         }
     }
 }
