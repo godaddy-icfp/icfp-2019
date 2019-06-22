@@ -1,26 +1,28 @@
-package icfp2019.GameEngine
+package icfp2019.StateEngine
 
 import com.google.common.collect.ImmutableMap
-import icfp2019.Node
-import icfp2019.Problem
 
 class GameState {}
 class RobotId {}
 class Action {}
 
-class GameEngine(gameState: GameState, robotActionMap: ImmutableMap<RobotId, Action>) : GameState {
-  val gameState: GameState
-  val robotActionMap: ImmutableMap<RobotId, Action>
-  init {
-    this.gameState = gameState
-    this.robotActionMap = robotActionMap
-  }
+class StateEngine {
+//  init {
+//    this.gameState = gameState
+//    this.robotActionMap = robotActionMap
+//  }
 
-  // -> Return GameSatte
+  // -> Return GameState
   fun apply(currentGameState: GameState, robotIdMap: ImmutableMap<RobotId, Action>): Nothing {
     // Implement meaningful shit here
-    return Nothing
+    TODO("Implement apply")
   }
+
+//  val historyOfMapActions : MutableMap<RobotId, List<Action>>
+//    get() {
+//      return this.historyOfMapActions;
+//    }
+
 
 //  val historyMap: ImmutableMap<RobotId, Action>
 //    get() {
