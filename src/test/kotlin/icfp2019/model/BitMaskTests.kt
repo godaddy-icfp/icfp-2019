@@ -1,4 +1,4 @@
-package icfp2019
+package icfp2019.model
 
 import icfp2019.model.Cell
 import org.junit.jupiter.api.Assertions

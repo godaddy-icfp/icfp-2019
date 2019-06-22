@@ -1,4 +1,4 @@
-package icfp2019
+package icfp2019.analyzers
 
 import icfp2019.analyzers.GetNumberOfWrappedOrNot
 import icfp2019.model.GameBoard

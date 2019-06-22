@@ -1,4 +1,4 @@
-package icfp2019
+package icfp2019.model
 
 import icfp2019.model.GameBoard
 import icfp2019.model.Node
