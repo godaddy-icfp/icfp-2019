@@ -3,16 +3,6 @@ package icfp2019
 import java.lang.IllegalStateException
 import java.util.*
 
-class TransitionEngine {
-    fun apply(gameState: GameState, actions: Map<Int, Action>): GameState {
-        // TODO: implement later
-
-        actions.forEach { println("yay!" + it.key.toString()) }
-
-        return GameState(gameState.gameBoard, listOf(), listOf(), listOf())
-    }
-}
-
 // Move to an open space and push moves onto a stack, if no moves available then backtrack using the stack
 class BackTrackingStrategy : Strategy {
     override fun getActions(gameState: GameState): Map<Int, List<Action>> {
