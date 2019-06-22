@@ -3,12 +3,22 @@ package icfp2019.core
 import icfp2019.*
 
 interface MoveSelector {
-    fun selectFrom(strategies: Iterable<Strategy>): (map: GameBoard) -> (state: GameState) -> Proposal
+    fun selectFrom(strategies: Iterable<Strategy>): (map: GameBoard) -> (robotId : RobotId, state: GameState) -> Proposal
 }
 
 object DefaultMoveSelector : MoveSelector {
-    override fun selectFrom(strategies: Iterable<Strategy>): (map: GameBoard) -> (state: GameState) -> Proposal {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override fun selectFrom(strategies: Iterable<Strategy>): (map: GameBoard) -> (robotId : RobotId, state: GameState) -> Proposal {
+
+        return { gameBoard -> { robotId, state ->
+            gameBoard
+            Proposal(DistanceEstimate(0), Action.MoveRight)
+        } }
+    }
+
+    fun x() {
+        val x = this.selectFrom(listOf())
+        val y = x(GameBoard)
+        val z = y()
     }
 
     // This code is wrong now
