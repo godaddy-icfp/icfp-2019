@@ -4,7 +4,7 @@ enum class Direction {
     U, D, L, R, E
 }
 
-fun applyLongestStraightPathAlgorithm(map: Array<Array<Node>>) : List<List<Pair<Direction, Int>>> {
+fun applyLongestStraightPathAlgorithm(map: Array<Array<Node>>): List<List<Pair<Direction, Int>>> {
     val maxX = map.size
     val maxY = map[0].size
     val ret = map.mapIndexed { x, subArray ->
@@ -32,7 +32,7 @@ fun applyLongestStraightPathAlgorithm(map: Array<Array<Node>>) : List<List<Pair<
                     Direction.L to leftSum,
                     Direction.R to rightSum,
                     Direction.U to upSum,
-                    Direction.D to downSum).maxBy { it.second } !!
+                    Direction.D to downSum).maxBy { it.second }!!
             }
         }
     }
