@@ -4,7 +4,8 @@ data class GameState(
     val gameBoard: GameBoard,
     val robotStateList: List<RobotState>,
     val teleportDestination: List<Point>,
-    val unusedBoosters: List<Booster>) {
+    val unusedBoosters: List<Booster>
+) {
 
     fun availableMoves(point: Point): List<Action> {
         val moves = mutableListOf<Action>()
@@ -39,7 +40,6 @@ data class GameState(
             }
         }
 
-        return moves;
+        return moves
     }
 }
-
