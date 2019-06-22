@@ -22,6 +22,7 @@ class ParserTests {
             "(23,3),(23,4),(24,4),(24,3),(25,3),(25,7),(26,7),(26,13),(24,13),(24,14),(23,14),(23,13),(22,13),(22,14)," +
             "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
+
     val problem = ProblemDescription(ProblemId(3), problem3Input)
     val p = parseDesc(problem)
 
@@ -33,10 +34,8 @@ class ParserTests {
       })
     }
 
-
     println()
     println("===================")
-
 
     (p.size.x - 1).downTo(0).forEach { x ->
       0.until(p.size.y).forEach { y ->
@@ -50,5 +49,19 @@ class ParserTests {
 
       println()
     }
+  }
+
+  @Test
+  fun testBoosterParser() {
+    val boosters = "X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
+    val actual = parseBoosters(boosters)
+    val expected = listOf<Pair<Boosters, Point>>(
+            Pair(Boosters.X, Point(16, 25)),
+            Pair(Boosters.L, Point(19, 19)),
+            Pair(Boosters.F, Point(4, 30)),
+            Pair(Boosters.F, Point(17, 21)),
+            Pair(Boosters.B, Point(4, 31))
+    )
+    Assertions.assertEquals(actual, expected)
   }
 }

@@ -24,11 +24,11 @@ fun main() {
 }
 
 fun writeZip(workingDir: Path, solutions: MutableList<Solution>) {
-  TODO("not implemented")
+  TODO(workingDir.toString() + solutions.toString() + "not implemented");
 }
 
 fun readZipFile(file: File): List<ProblemDescription> {
-  TODO("not implemented")
+  TODO(file.toString() + "not implemented")
 }
 
 enum class Boosters {
@@ -55,7 +55,6 @@ Task:
  5. output to file prob_NNN.sol (use checker to validate?) https://icfpcontest2019.github.io/solution_checker/
  6. add solution to another zip (script/program)
  */
-
 
 /*
 A solution for a task
@@ -91,6 +90,26 @@ data class Solution(val problemId: ProblemId, val actions: List<Actions>)
 
 fun solve(problem: Problem): Solution {
   return Solution(problem.problemId, listOf())
+}
+
+fun constructObstacleMap(problem: Problem): Array<Array<Boolean>> {
+    val rowSize = problem.map.size
+    val colSize = problem.map.get(0).size
+    // Create a Array of Array map for the given problem with
+    val rowObstacle = Array(rowSize) {i -> Array(colSize) {j -> false}}
+    val row = problem.map
+    for (i in row.indices) {
+        val colObstacle = Array(colSize){ i -> false}
+        val col = row.get(i)
+        for (j in col.indices) {
+            val node = col[j]
+            if (node.isObstacle) {
+                colObstacle.set(j,true)
+            }
+        }
+        rowObstacle.set(i,colObstacle)
+    }
+    return rowObstacle
 }
 
 fun encodeSolution(solution: Solution, directory: Path): File {

@@ -1,3 +1,5 @@
+package icfp2019
+
 import java.io.File
 import java.util.zip.ZipFile
 
@@ -14,7 +16,7 @@ class Problems {
         ZipFile(path).use { zip ->
             zip.entries().asSequence().forEach { entry ->
                 if(entry.name.endsWith(".desc")) {
-                    zip.getInputStream(entry).use { input ->
+                    zip.getInputStream(entry).use { _ ->
                         val content = File(entry.name).readText()
                         problemMap.put(entry.name, content)
                     }
