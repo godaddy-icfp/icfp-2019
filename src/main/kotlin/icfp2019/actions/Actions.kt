@@ -1,5 +1,14 @@
 package icfp2019.actions
 
-enum class Actions {
-  W, S, A, D, Z, E, Q, B, F, L
+enum class Actions(val action: String) {
+  W("W"),
+  S("S"),
+  A("A"),
+  D("D"),
+  Z("Z"),
+  E("E"),
+  Q("Q"),
+  B("B"),
+  F("F"),
+  L("L")
 }

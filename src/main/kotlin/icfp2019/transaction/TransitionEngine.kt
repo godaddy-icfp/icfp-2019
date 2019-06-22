@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap
 import icfp2019.Actions
 import icfp2019.RobotId
 
-
 class GameState {}
 
 class TransitionEngine {
