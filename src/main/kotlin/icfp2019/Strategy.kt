@@ -4,5 +4,5 @@ class GameState
 
 interface Strategy {
     // Given a state, return a list of actions, indexed by Robot id.
-    fun getActions(gameState: GameState): Map<Int, Action>
+    fun getActions(gameState: GameState): Map<Int, List<Action>>
 }
