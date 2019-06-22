@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class OutputTests {
-    fun getListOfAction() : MutableList<Action> {
+    fun getListOfAction(): MutableList<Action> {
         return mutableListOf(
             Action.MoveDown,
             Action.MoveDown,
