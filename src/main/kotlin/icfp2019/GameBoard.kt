@@ -53,7 +53,7 @@ data class GameBoard(
 
     // Return a sequence of rows, which is a sequence of values
 
-    fun rows() : List<List<Short>> {
+    fun rows(): List<List<Short>> {
         return (0 until height).map { y ->
             (0 until width).map { x -> get(Point(x, y)) }
         }
