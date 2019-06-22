@@ -3,7 +3,6 @@ package icfp2019.analyzers
 import icfp2019.*
 import icfp2019.core.Analyzer
 
-
 object MoveListAnalyzer : Analyzer<(RobotId) -> List<Action>> {
     override fun analyze(map: GameBoard): (state: GameState) -> (RobotId) -> List<Action> {
         return { gameState ->
@@ -17,10 +16,10 @@ object MoveListAnalyzer : Analyzer<(RobotId) -> List<Action>> {
                             return state
                         }
                     }
-                    return null;
-                };
+                    return null
+                }
 
-                val robotState = getRobotState(robotId);
+                val robotState = getRobotState(robotId)
 
                 // Asking about a bad location... No moves
                 if (robotState != null &&
