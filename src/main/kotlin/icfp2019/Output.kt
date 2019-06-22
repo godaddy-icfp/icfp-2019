@@ -28,7 +28,9 @@ The actions are encoded as follows:
 class Output {
     companion object {
         fun encodeActions(actions: Iterable<Action>): String =
-            actions.joinToString(separator = "") { it.toSolutionString() }
+            actions.joinToString(separator = "") {
+                it.toSolutionString()
+            }
 
         fun encodeRobotActions(robotActions: Map<RobotId, List<Action>>): String =
             robotActions.entries.sortedBy { it.key.id }
