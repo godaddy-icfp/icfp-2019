@@ -30,7 +30,7 @@ class DrillTests {
         for (y in (maxY - 1) downTo 0) {
             for (x in 0 until maxX) {
                 for (ds in map[x][y]) {
-                    print("("+ds.direction+","+ds.value+")")
+                    print("(" + ds.direction + "," + ds.value + ")")
                     print("|")
                 }
             }

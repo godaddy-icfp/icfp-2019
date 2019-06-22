@@ -28,7 +28,6 @@ fun buildDrillRequiredFromEachNode(problem: Problem): Array<Array<Array<DrillSta
                     .takeWhile { it.isObstacle }
                     .count()
 
-
                 val downDir = (y downTo 0).map {
                     currentGrid[x][it]
                 }
