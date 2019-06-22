@@ -11,6 +11,7 @@ import org.jgrapht.graph.SimpleGraph
  * reach there.
  *
  */
+
 fun getShortestDistanceFromPoints(
     currentNode: Node,
     possibleNodeSets : Set<Node>,

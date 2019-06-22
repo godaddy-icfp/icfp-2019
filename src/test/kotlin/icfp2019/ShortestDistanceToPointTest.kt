@@ -1,10 +1,8 @@
 package icfp2019
 
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath
-import org.jgrapht.graph.DefaultDirectedGraph
 import org.jgrapht.graph.DefaultEdge
-import org.jgrapht.graph.DefaultUndirectedGraph
 import org.jgrapht.graph.SimpleGraph
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 
@@ -13,19 +11,23 @@ class ShortestDistanceToPointTest {
     @Test
     fun testShortestDistanceToPoint() {
 
-        val currentNode = Node(Point(0,0),true,null)
+        val currentNode = Node(Point(0,0),false,null)
 
-        val node01 = Node(Point(0,1),true,null)
-        val node02 = Node(Point(0,2),true,null)
-        val node03 = Node(Point(0,3),true,null)
-        val node10 = Node(Point(1,0),true,null)
-        val node11 = Node(Point(1,1),true,null)
-        val node12 = Node(Point(1,2),true,null)
-        val node13 = Node(Point(1,3),true,null)
-        val node20 = Node(Point(2,0),true,null)
-        val node21 = Node(Point(2,1),true,null)
-        val node22 = Node(Point(2,2),true,null)
-        val node23 = Node(Point(2,3),true,null)
+        val node01 = Node(Point(0,1),false,null)
+        val node02 = Node(Point(0,2),false,null)
+        val node03 = Node(Point(0,3),false,null)
+        val node10 = Node(Point(1,0),false,null)
+        val node11 = Node(Point(1,1),false,null)
+        val node12 = Node(Point(1,2),false,null)
+        val node13 = Node(Point(1,3),false,null)
+        val node20 = Node(Point(2,0),false,null)
+        val node21 = Node(Point(2,1),false,null)
+        val node22 = Node(Point(2,2),false,null)
+        val node23 = Node(Point(2,3),false,null)
+
+        val setOfTargetNodes = setOf(
+            node21
+        )
 
         val undirectedGraph = SimpleGraph<Node, DefaultEdge>(DefaultEdge::class.java)
         undirectedGraph.addVertex(node01)
@@ -42,26 +44,32 @@ class ShortestDistanceToPointTest {
         undirectedGraph.addVertex(currentNode)
 
 
-        undirectedGraph.addEdge("a", "b")
-        undirectedGraph.addEdge("b","d")
-        undirectedGraph.addEdge("b","e")
-        undirectedGraph.addEdge("d","g")
-        undirectedGraph.addEdge("e","g")
-        undirectedGraph.addEdge("e","f")
-        undirectedGraph.addEdge("a","f")
-        undirectedGraph.addEdge("f","g")
-        undirectedGraph.addEdge("g","h")
-        undirectedGraph.addEdge("h","i")
+        undirectedGraph.addEdge(currentNode,node01)
+        undirectedGraph.addEdge(node01,node02)
+        undirectedGraph.addEdge(node02,node03)
+        undirectedGraph.addEdge(currentNode,node10)
+        undirectedGraph.addEdge(node10,node20)
+        undirectedGraph.addEdge(node01,node11)
+        undirectedGraph.addEdge(node11,node21)
+        undirectedGraph.addEdge(node02,node12)
+        undirectedGraph.addEdge(node12,node22)
+        undirectedGraph.addEdge(node03,node13)
+        undirectedGraph.addEdge(node13,node23)
+        undirectedGraph.addEdge(node10,node11)
+        undirectedGraph.addEdge(node11,node12)
+        undirectedGraph.addEdge(node12,node13)
+        undirectedGraph.addEdge(node20,node21)
+        undirectedGraph.addEdge(node21,node22)
+        undirectedGraph.addEdge(node22,node23)
 
-        val shortestPathUndirectedGraph = DijkstraShortestPath(undirectedGraph)
-        val ipaths1 = shortestPathUndirectedGraph.getPath("i", "d")
-        println(ipaths1)
-        println()
+        val shortestDistance = getShortestDistanceFromPoints(currentNode, setOfTargetNodes, undirectedGraph)
 
 
-
-
-
-
+        Assertions.assertEquals(shortestDistance.get(0).vertexList, listOf(
+            Node(Point(0,0), false, null ),
+            Node(Point(1,0), false, null ),
+            Node(Point(2,0), false, null ),
+            Node(Point(2,1), false, null )
+        ))
     }
 }
