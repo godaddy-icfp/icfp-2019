@@ -33,19 +33,19 @@ data class GameBoard(
     }
 
     fun isInBoard(x: Int, y: Int): Boolean {
-        return (x > 0 && x < problem.size.x && y > 0 && y < problem.size.y);
+        return (x > 0 && x < problem.size.x && y > 0 && y < problem.size.y)
     }
 
     fun get(x: Int, y: Int): Short {
         if (!isInBoard(x, y)) {
-            return Cell.NOT_A_CELL;
+            return Cell.NOT_A_CELL
         }
         return cells[x * width + y]
     }
 
     fun set(x: Int, y: Int, value: Short): GameBoard {
         if (!isInBoard(y, y)) {
-            return this;
+            return this
         }
         val newCells = cells.clone()
         newCells[x * width + y] = value

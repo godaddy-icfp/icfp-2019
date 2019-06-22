@@ -34,8 +34,8 @@ class Cell {
 
         fun hasFlag(value: Short, flag: Short): Boolean {
             // Check for bogus cell
-            val invalidCell: Short = value and NOT_A_CELL;
-            if (invalidCell > 0) return false;
+            val invalidCell: Short = value and NOT_A_CELL
+            if (invalidCell > 0) return false
 
             // an Undefined flag is a special case.
             if (value == ZERO || (value > ZERO && flag == ZERO)) return false
