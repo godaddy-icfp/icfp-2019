@@ -17,20 +17,22 @@ class DrillTests {
                     "(23,3),(23,4),(24,4),(24,3),(25,3),(25,7),(26,7),(26,13),(24,13),(24,14),(23,14),(23,13),(22,13),(22,14)," +
                     "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
-        val problem = ProblemDescription(ProblemId(3), problem3Input)
-        val p = parseDesc(problem)
-        val drillDist = getTotalDrillRequiredInRightDirectionScan(p)
-        printBoard(drillDist)
+        val p = parseDesc(problem3Input)
+        // In the right direction
+        val drillDistRight = buildDrillRequiredFromEachNode(p)
+        printBoard(drillDistRight)
     }
 
-    private fun printBoard(map: Array<Array<Int>>) {
+    private fun printBoard(map: Array<Array<Array<DrillState>>>) {
         println("${map.size} ${map[0].size}")
         val maxX = map.size
         val maxY = map[0].size
         for (y in (maxY - 1) downTo 0) {
             for (x in 0 until maxX) {
-                print("%02d".format(map[x][y]))
-                print(' ')
+                for (ds in map[x][y]) {
+                    print("("+ds.direction+","+ds.value+")")
+                    print("|")
+                }
             }
             println()
         }
