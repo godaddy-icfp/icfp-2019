@@ -9,7 +9,7 @@ import org.jgrapht.graph.DefaultEdge
 object ShortestPathUsingFlyodWarshall : Analyzer<ShortestPathAlgorithm<Node, DefaultEdge>> {
     override fun analyze(map: GameBoard): (state: GameState) -> ShortestPathAlgorithm<Node, DefaultEdge> {
         val completeGraph = GraphAnalyzer.analyze(map)
-        return {graphState ->
+        return { graphState ->
             val graph = completeGraph(graphState)
             FloydWarshallShortestPaths(graph)
         }
