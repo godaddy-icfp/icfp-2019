@@ -6,5 +6,3 @@ import icfp2019.GameState
 interface Strategy {
     fun compute(map: GameBoard): (state: GameState) -> Proposal
 }
-
-
