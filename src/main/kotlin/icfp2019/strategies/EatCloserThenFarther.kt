@@ -40,7 +40,7 @@ class EatCloserThenFarther : Strategy2 {
                 .filter { !state.get(points[it].second.second).isWrapped }
                 .isEmpty()
 
-            val maxDistance = state.mapSize.x * state.mapSize.y
+            val maxDistance = Int.MAX_VALUE
             val wrappedUnwrapped = GetNumberOfWrappedOrNot.analyze(initialState)(state)
             val distance = if (allWrapped) {
                 maxDistance

@@ -62,6 +62,6 @@ class EatCloserThenFatherTests {
         val s = EatCloserThenFarther().compute(gs)
         val m1 = s(gs)
         Assertions.assertEquals(Action.MoveRight, m1.nextMove)
-        Assertions.assertEquals(gs.mapSize.x * gs.mapSize.y, m1.estimatedDistance.distance)
+        Assertions.assertEquals(Int.MAX_VALUE, m1.estimatedDistance.distance)
     }
 }
