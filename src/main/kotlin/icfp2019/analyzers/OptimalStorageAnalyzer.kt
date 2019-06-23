@@ -2,7 +2,7 @@ package icfp2019.analyzers
 
 import icfp2019.core.Analyzer
 import icfp2019.Cache
-import icfp2019.model.Booster
+import icfp2019.model.Boosters
 import icfp2019.model.Cell
 import icfp2019.model.GameBoard
 import icfp2019.model.GameState
@@ -15,11 +15,11 @@ object OptimalStorageAnalyzer : Analyzer<Array<Short>> {
                 val offset = cell.point.x * map.height + cell.point.y
                 cells[offset] = when {
                     cell.isObstacle -> Cell.OBSTACLE
-                    cell.booster == Booster.ExtraArm -> Cell.BOOST_EXT
-                    cell.booster == Booster.Drill -> Cell.BOOST_DRILL
-                    cell.booster == Booster.FastWheels -> Cell.BOOST_FAST
-                    cell.booster == Booster.Teleporter -> Cell.BOOST_TELEPORT
-                    cell.booster == Booster.CloneToken -> Cell.BOOST_CLONE
+                    cell.boosters == Boosters.ExtraArm -> Cell.BOOST_EXT
+                    cell.boosters == Boosters.Drill -> Cell.BOOST_DRILL
+                    cell.boosters == Boosters.FastWheels -> Cell.BOOST_FAST
+                    cell.boosters == Boosters.Teleporter -> Cell.BOOST_TELEPORT
+                    cell.boosters == Boosters.CloneToken -> Cell.BOOST_CLONE
                     else -> Cell.ZERO
                 }
             }

@@ -15,13 +15,13 @@ object MoveAnalyzer : Analyzer<(RobotId, Action) -> Boolean> {
                 ) {
                     val cell = map.get(robotState.currentPosition)
 
-                    fun hasBooster(booster: Booster): Boolean {
-                        return gameState.unusedBoosters.contains(booster)
+                    fun hasBooster(boosters: Boosters): Boolean {
+                        return gameState.unusedHotTiles.contains(boosters)
                     }
 
                     fun canMoveTo(point: Point): Boolean {
                         return map.isInBoard(point) &&
-                                (!cell.isObstacle || hasBooster(Booster.Drill))
+                                (!cell.isObstacle || hasBooster(Boosters.Drill))
                     }
 
                     fun canTeleportTo(point: Point): Boolean {
@@ -36,10 +36,10 @@ object MoveAnalyzer : Analyzer<(RobotId, Action) -> Boolean> {
                         Action.DoNothing -> true
                         Action.TurnClockwise -> true
                         Action.TurnCounterClockwise -> true
-                        is Action.AttachManipulator -> hasBooster(Booster.ExtraArm)
-                        Action.AttachFastWheels -> hasBooster(Booster.FastWheels)
-                        Action.StartDrill -> hasBooster(Booster.Drill)
-                        Action.PlantTeleportResetPoint -> hasBooster(Booster.Teleporter)
+                        is Action.AttachManipulator -> hasBooster(Boosters.ExtraArm)
+                        Action.AttachFastWheels -> hasBooster(Boosters.FastWheels)
+                        Action.StartDrill -> hasBooster(Boosters.Drill)
+                        Action.PlantTeleportResetPoint -> hasBooster(Boosters.Teleporter)
                         is Action.TeleportBack -> canTeleportTo(action.targetResetPoint)
                         Action.CloneRobot -> hasBooster(Booster.CloneToken) &&
                                 map.get(robotState.currentPosition).hasBooster(Booster.CloningLocation)

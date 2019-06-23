@@ -8,7 +8,7 @@ data class GameState(
     val mapSize: MapSize,
     val robotState: Map<RobotId, RobotState>,
     val teleportDestination: List<Point>,
-    val unusedBoosters: List<Booster>
+    val unusedHotTiles: List<Boosters>
 ) {
     companion object {
         // Helper for constructing a game state from minimal description
@@ -67,6 +67,6 @@ data class GameState(
             throw ArrayIndexOutOfBoundsException("Access out of game board")
         }
         val newCells = cells.with(point.x, cells[point.x].with(point.y, value))
-        return GameState(newCells, mapSize, robotState, teleportDestination, unusedBoosters)
+        return GameState(newCells, mapSize, robotState, teleportDestination, unusedHotTiles)
     }
 }

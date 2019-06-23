@@ -1,6 +1,6 @@
 package icfp2019
 
-import icfp2019.model.Booster
+import icfp2019.model.Boosters
 import icfp2019.model.Node
 import icfp2019.model.Point
 import org.junit.jupiter.api.Assertions
@@ -135,11 +135,11 @@ class ParserTests {
         val boosters = "X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
         val actual = parseBoosters(boosters)
         val expected = listOf(
-            ParsedBooster(Booster.CloningLocation, Point(16, 25)),
-            ParsedBooster(Booster.Drill, Point(19, 19)),
-            ParsedBooster(Booster.FastWheels, Point(4, 30)),
-            ParsedBooster(Booster.FastWheels, Point(17, 21)),
-            ParsedBooster(Booster.ExtraArm, Point(4, 31))
+            ParsedBooster(Boosters.CloningLocation, Point(16, 25)),
+            ParsedBooster(Boosters.Drill, Point(19, 19)),
+            ParsedBooster(Boosters.FastWheels, Point(4, 30)),
+            ParsedBooster(Boosters.FastWheels, Point(17, 21)),
+            ParsedBooster(Boosters.ExtraArm, Point(4, 31))
         )
         Assertions.assertEquals(actual, expected)
     }

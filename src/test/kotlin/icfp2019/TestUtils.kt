@@ -22,7 +22,7 @@ fun boardString(p: Problem, path: Set<Node> = setOf()): String {
                 node.isObstacle -> 'X'
                 node in path -> '|'
                 node.isWrapped -> 'w'
-                node.booster != null -> 'o'
+                node.boosters != null -> 'o'
                 else -> '.'
             }
         }.joinToString(separator = " ")

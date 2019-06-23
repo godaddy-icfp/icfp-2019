@@ -1,6 +1,6 @@
 package icfp2019.model
 
-sealed class Booster {
+sealed class Boosters {
     companion object {
         private val mapping = mapOf(
             'B' to ExtraArm,
@@ -19,11 +19,11 @@ sealed class Booster {
         }
     }
 
-    object ExtraArm : Booster()
-    object FastWheels : Booster()
-    object Drill : Booster()
-    object Teleporter : Booster()
+    object ExtraArm : Boosters()
+    object FastWheels : Boosters()
+    object Drill : Boosters()
+    object Teleporter : Boosters()
 
-    object CloningLocation : Booster()
-    object CloneToken : Booster()
+    object CloningLocation : Boosters()
+    object CloneToken : Boosters()
 }

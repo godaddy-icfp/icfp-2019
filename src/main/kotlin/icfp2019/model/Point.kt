@@ -1,6 +1,8 @@
 package icfp2019.model
 
 data class Point(val x: Int, val y: Int) {
+    constructor() : this(0, 0)
+
     companion object {
         fun origin(): Point {
             return Point(0, 0)
