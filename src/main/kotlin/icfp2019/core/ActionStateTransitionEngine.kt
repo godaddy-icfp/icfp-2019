@@ -5,11 +5,9 @@ import icfp2019.model.GameState
 import icfp2019.model.RobotId
 import icfp2019.model.RobotState
 
-fun applyActions(state: GameState, robotActions: Iterable<Pair<RobotId, Action>>): GameState {
-    return robotActions.fold(state) { gameState, (robotId, action) ->
-        val newRobotState = adjustRobotState(gameState, robotId, action)
-        gameState.copy(robotState = gameState.robotState.plus(robotId to newRobotState))
-    }
+fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameState {
+    val newRobotState = adjustRobotState(gameState, robotId, action)
+    return gameState.copy(robotState = gameState.robotState.plus(robotId to newRobotState))
 }
 
 private fun adjustRobotState(
