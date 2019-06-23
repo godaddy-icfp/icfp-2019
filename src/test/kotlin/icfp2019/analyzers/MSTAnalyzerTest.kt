@@ -1,9 +1,6 @@
 package icfp2019.analyzers
 
-import icfp2019.GameBoard
-import icfp2019.GameState
-import icfp2019.Node
-import icfp2019.Point
+import icfp2019.model.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
@@ -38,7 +35,7 @@ class MSTAnalyzerTest {
         )
 
         val spanningTree = MSTAnalyzer
-            .analyze(gameBoard)(GameState.empty(Point(2, 1)))
+            .analyze(gameBoard)(GameState.gameStateOf(Point(2, 1)))
 
         val count = spanningTree.edges.size
         Assertions.assertEquals(count, 5)
@@ -75,7 +72,7 @@ class MSTAnalyzerTest {
         )
 
         val spanningTree = MSTAnalyzer
-            .analyze(gameBoard)(GameState.empty(Point(0, 0)))
+            .analyze(gameBoard)(GameState.gameStateOf(Point(0, 0)))
 
         val count = spanningTree.edges.size
         Assertions.assertEquals(count, 8)
