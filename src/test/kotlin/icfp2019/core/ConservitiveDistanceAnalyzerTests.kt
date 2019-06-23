@@ -23,27 +23,26 @@ internal class ConservitiveDistanceAnalyzerTests {
         printBoard(problem, result.second)
     }
 
-    val map =
-        """
-XXXXXXXXXXXXXXXXXXXXXXXXXX
-XX..XXXXXXXXXXXXXX..XXXXXX
-XX..XXXXXXXXXXXXXX..XXXXXX
-XX..XXXXXXXXXXXXXX..XXXXXX
-XX..XXXXXXXXXXXXXX..XXXXXX
-XX...XXXXXXXXXXXX...XXXXXX
-XX...XXXXXXXXXXXX...XXXXXX
-XX...XXXXXX.XXXXX...XXXXXX
-XX...XXXXX..XXXXX...XXXXXX
-XX....XXXX..XXXX....XXXXXX
-XX.....XX....XX.....XXXXXX
-XXwwwwwwwwwwwwwwwwwwwwXXXX
-XXwwwwwwwwwwwwwwwwwwwwXXXX
-XXwwwwwwwwwwwwwwwwwwwwXXXX
-XXwwwwwwwwwwwwwwwwwwwwXXXX
-XXwwwwwwwwwwwwwwwwwwwwXXXX
-XXwwwwwwww@wwwwwwwwwwwXXXX
-XXXXXXXXXXXXXXXXXXXXXXXXXX
-"""
+    val map = """
+            XXXXXXXXXXXXXXXXXXXXXXXXXX
+            XX..XXXXXXXXXXXXXX..XXXXXX
+            XX..XXXXXXXXXXXXXX..XXXXXX
+            XX..XXXXXXXXXXXXXX..XXXXXX
+            XX..XXXXXXXXXXXXXX..XXXXXX
+            XX...XXXXXXXXXXXX...XXXXXX
+            XX...XXXXXXXXXXXX...XXXXXX
+            XX...XXXXXX.XXXXX...XXXXXX
+            XX...XXXXX..XXXXX...XXXXXX
+            XX....XXXX..XXXX....XXXXXX
+            XX.....XX....XX.....XXXXXX
+            XXwwwwwwwwwwwwwwwwwwwwXXXX
+            XXwwwwwwwwwwwwwwwwwwwwXXXX
+            XXwwwwwwwwwwwwwwwwwwwwXXXX
+            XXwwwwwwwwwwwwwwwwwwwwXXXX
+            XXwwwwwwwwwwwwwwwwwwwwXXXX
+            XXwwwwwwww@wwwwwwwwwwwXXXX
+            XXXXXXXXXXXXXXXXXXXXXXXXXX
+            """
 
     private fun parseTestMap(map: String): Problem {
         val lines = Splitter.on(CharMatcher.breakingWhitespace()).splitToList(map.trim()).reversed()
