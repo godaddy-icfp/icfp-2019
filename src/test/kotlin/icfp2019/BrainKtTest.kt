@@ -64,7 +64,7 @@ internal class BrainKtTest {
 
     private val fini =
         """
-        @..
+        w..
         www
         ..w
         """
