@@ -44,6 +44,7 @@ class EatCloserThenFarther : Strategy2 {
                     .maxBy { it.second }
             } else {
                 newValues
+                    .filter { !state.get(points[it.first].second.second).isWrapped }
                     .minBy { it.second }
             }
 
