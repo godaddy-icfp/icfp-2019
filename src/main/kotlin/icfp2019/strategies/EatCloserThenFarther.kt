@@ -32,7 +32,7 @@ class EatCloserThenFarther : Strategy2 {
             // [Index, distance]
             val newValues = newStates
                 .map { it.first to distanceToWallsAnalyzer(initialRobot, it.second) }
-                .filter { it.second >= 0 }
+                .filter { it.second != DistanceToWalls.obstacle }
 
             // Deal with wrapped vs unwrapped. If all wrapped, go for the largest.
             // Else, go for the smallest.
