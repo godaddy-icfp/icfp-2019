@@ -27,7 +27,7 @@ class DistanceToWalls : Analyzer2<Distance> {
         val ret = map.mapIndexed { x, subArray ->
             subArray.mapIndexed { y, node ->
                 if (node.isObstacle) {
-                   obstacle
+                    obstacle
                 } else {
                     val weightX = if (x < maxX / 2) x + 1 else maxX - x
                     val weightY = if (y < maxY / 2) y + 1 else maxY - y
