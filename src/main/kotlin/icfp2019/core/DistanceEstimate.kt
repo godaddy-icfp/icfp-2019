@@ -46,5 +46,4 @@ object ConservitiveDistanceAnalyzer : Analyzer<(position: Point) -> Pair<Int, Se
             }
         }
     }
-
 }

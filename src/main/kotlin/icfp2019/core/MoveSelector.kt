@@ -7,5 +7,3 @@ import icfp2019.model.RobotId
 interface MoveSelector {
     fun selectFrom(strategies: Iterable<Strategy>): (map: GameBoard) -> (robotId: RobotId, state: GameState) -> Proposal
 }
-
-
