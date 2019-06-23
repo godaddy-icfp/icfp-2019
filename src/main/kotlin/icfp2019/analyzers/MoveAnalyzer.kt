@@ -24,12 +24,7 @@ object MoveAnalyzer : Analyzer<(RobotId, Action) -> Boolean> {
                     val cell = map.get(robotState.currentPosition)
 
                     fun hasBooster(booster: Booster): Boolean {
-                        for (possibleBooster: Booster in gameState.unusedBoosters) {
-                            if (booster == possibleBooster) {
-                                return true
-                            }
-                        }
-                        return false
+                        return gameState.unusedBoosters.contains(booster)
                     }
 
                     fun canMoveTo(point: Point): Boolean {
@@ -38,12 +33,7 @@ object MoveAnalyzer : Analyzer<(RobotId, Action) -> Boolean> {
                     }
 
                     fun canTeleportTo(point: Point): Boolean {
-                        for (location: Point in gameState.teleportDestination) {
-                            if (location == point) {
-                                return true
-                            }
-                        }
-                        return false
+                        return gameState.teleportDestination.contains(point)
                     }
 
                     possible = when (action) {
