@@ -19,27 +19,16 @@ class DistanceToWallsTests {
                     "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
         val p = parseDesc(problem3Input)
-        /*
-        val g = GameBoard(p.map, p.size.x, p.size.y)
-        val analyzer = DistanceToWalls().analyze(g)
-        val firstRobotState = RobotState(RobotId(0), Point(20, 0))
-        val r1 = analyzer(0, GameState(listOf(firstRobotState), listOf(), listOf()))
-        Assertions.assertEquals(8, r1)
-        val secondRobotState = RobotState(RobotId(0), Point(22, 0))
-        val r2 = analyzer(0, GameState(listOf(secondRobotState), listOf(), listOf()))
-        Assertions.assertEquals(6, r2)
-
-         */
         val robotId = RobotId(0)
 
         val gs1 = GameState.gameStateOf(p, Point(20, 0))
         val analyzer1 = DistanceToWalls().analyze(gs1)
         val r1 = analyzer1(robotId, gs1)
-        Assertions.assertEquals(8, r1)
+        Assertions.assertEquals(8, r1.value)
 
         val gs2 = GameState.gameStateOf(p, Point(22, 0))
         val analyzer2 = DistanceToWalls().analyze(gs1)
         val r2 = analyzer2(robotId, gs2)
-        Assertions.assertEquals(6, r2)
+        Assertions.assertEquals(6, r2.value)
     }
 }
