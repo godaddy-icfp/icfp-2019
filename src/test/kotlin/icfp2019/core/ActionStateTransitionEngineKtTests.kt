@@ -88,7 +88,7 @@ internal class ActionStateTransitionEngineKtTests {
         @lX..
         ..X..
     """.toProblem()
-        val gameState = GameState.gameStateOf(problem)
+        val gameState = GameState(problem)
 
         val actions = listOf(
             Action.MoveRight, Action.StartDrill, Action.MoveRight, Action.MoveRight, Action.MoveRight
@@ -113,7 +113,7 @@ internal class ActionStateTransitionEngineKtTests {
         r....
         @....
     """.toProblem()
-        val gameState = GameState.gameStateOf(problem)
+        val gameState = GameState(problem)
 
         val actions = listOf(
             Action.MoveUp, Action.MoveUp, Action.MoveRight, Action.MoveRight,
