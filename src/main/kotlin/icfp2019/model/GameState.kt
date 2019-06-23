@@ -21,6 +21,16 @@ data class GameState(
                 listOf()
             )
 
+        // Helper for constructing a game state from minimal description
+        fun gameStateOf(cells: PVector<PVector<Node>>, mapSize : MapSize, startingPosition: Point) =
+            GameState(
+                cells,
+                mapSize,
+                listOf(RobotState(RobotId(0), startingPosition)),
+                listOf(),
+                listOf()
+            )
+
         // Construct an initial game state from the problem spec
         fun gameStateOf(problem: Problem) =
             GameState(
