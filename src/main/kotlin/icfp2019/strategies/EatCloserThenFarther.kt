@@ -1,6 +1,7 @@
 package icfp2019.strategies
 
 import icfp2019.analyzers.DistanceToWalls
+import icfp2019.analyzers.GetNumberOfWrappedOrNot
 import icfp2019.core.DistanceEstimate
 import icfp2019.core.Proposal
 import icfp2019.model.GameState
@@ -39,6 +40,13 @@ class EatCloserThenFarther : Strategy2 {
                 .filter { !state.get(points[it].second.second).isWrapped }
                 .isEmpty()
 
+            val maxDistance = state.mapSize.x * state.mapSize.y
+            val wrappedUnwrapped = GetNumberOfWrappedOrNot.analyze(initialState)(state)
+            val distance = if (allWrapped) {
+                maxDistance
+            } else {
+                wrappedUnwrapped.unwrapped
+            }
             val result = if (allWrapped) {
                 newValues
                     .maxBy { it.second }
@@ -49,9 +57,9 @@ class EatCloserThenFarther : Strategy2 {
             }
 
             if (result != null) {
-                Proposal(DistanceEstimate(0), points[result.first].second.first)
+                Proposal(DistanceEstimate(distance), points[result.first].second.first)
             } else {
-                Proposal(DistanceEstimate(0), Action.DoNothing)
+                Proposal(DistanceEstimate(maxDistance), Action.DoNothing)
             }
         }
     }
