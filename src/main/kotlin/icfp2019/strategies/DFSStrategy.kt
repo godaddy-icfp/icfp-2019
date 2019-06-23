@@ -7,6 +7,7 @@ import icfp2019.core.Proposal
 import icfp2019.core.Strategy
 import icfp2019.model.*
 import org.jgrapht.Graph
+import org.jgrapht.graph.AsSubgraph
 import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.traverse.DepthFirstIterator
 import org.jgrapht.traverse.GraphIterator
@@ -16,28 +17,35 @@ object DFSStrategy : Strategy {
     override fun compute(map: GameBoard): (state: GameState) -> Proposal {
         return { gameState ->
             val undirectedGraph: Graph<Node, DefaultEdge> = GraphAnalyzer.analyze(map).invoke(gameState)
-            val it: GraphIterator<Node, DefaultEdge> = DepthFirstIterator(undirectedGraph)
-            val visitedMap = mutableMapOf<Node, Boolean>()
 
-            val traversalList: MutableList<Action> = mutableListOf()
-            while (it.hasNext()) {
-                val currentNode: Node = it.next()
-                if (!visitedMap.containsKey(currentNode)) {
-                    // Consume the node if we haven't seen the node before
-                    val moves: List<Action> =
-                        when (!currentNode.isWrapped) {
-                            true -> MoveListAnalyzer.analyze(map)
-                                .invoke(gameState)
-                                .invoke(
-                                    (gameState.robotState[RobotId.first] ?: error("unable to find first robot")).robotId
-                                )
-                            false -> listOf()
-                        }
-                    traversalList.add(pickMove(moves))
-                }
+            val currPoint = gameState.robotState.values.first().currentPosition
+            val currNode = gameState.get(currPoint)
+            // Sub graph with unwrapped nodes
+            val unwrappedNodes = AsSubgraph(undirectedGraph, undirectedGraph.vertexSet().filter { it.isWrapped.not() }.plus(currNode).toSet())
+
+            // We need to tell the DFS the starting point, otherwise it always (0,0) regardless where the robot is
+            val it: GraphIterator<Node, DefaultEdge> = DepthFirstIterator(unwrappedNodes, currNode)
+            it.next() // ignore the first node since it always a starting point which where the robot standing
+
+            if (it.hasNext()) {
+                println("Backing tracing")
+                val nextNode  = it.next()
+                val moves2: List<Action> =
+                    when (!nextNode.isWrapped) {
+                        true -> MoveListAnalyzer.analyze(map)
+                            .invoke(gameState)
+                            .invoke(
+                                (gameState.robotState[RobotId.first] ?: error("unable to find first robot")).robotId
+                            )
+                        false -> listOf()
+                    }
+                Proposal(DistanceEstimate(0), pickMove(moves2))
+            } else {
+                // This only happend if the graph has only one node
+                Proposal(DistanceEstimate(0), Action.DoNothing)
             }
-            Proposal(DistanceEstimate(0), traversalList.first())
         }
+
     }
 
     // A "heuristic" for picking movements random shuffle and get the first

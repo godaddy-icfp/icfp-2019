@@ -69,4 +69,9 @@ data class GameState(
         val newCells = cells.with(point.x, cells[point.x].with(point.y, value))
         return GameState(newCells, mapSize, robotState, teleportDestination, unusedBoosters)
     }
+
+    fun updateRobotPosition(robotId: RobotId, point: Point) {
+        val robot = robotState.getValue(robotId)
+        robot.currentPosition = point
+    }
 }

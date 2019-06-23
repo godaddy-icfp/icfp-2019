@@ -1,38 +1,32 @@
 package icfp2019.analyzers
 
 import icfp2019.model.*
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
 
 class DFSAnalyzerTest {
+
     @Test
-    fun testDfsAnalyzerTest() {
+    fun testTwoNodesStart00moveTo01() {
         var gameBoard = GameBoard(
             TreePVector.from(
                 listOf(
                     TreePVector.from(
                         listOf(
-                            Node(Point(0, 0), false),
-                            Node(Point(0, 1), false)
+                            Node(Point(0, 0), false)
                         )
                     ),
                     TreePVector.from(
                         listOf(
-                            Node(Point(1, 0), false),
-                            Node(Point(1, 1), false)
-                        )
-                    ),
-                    TreePVector.from(
-                        listOf(
-                            Node(Point(2, 0), false),
-                            Node(Point(2, 1), false)
+                            Node(Point(1, 0), false)
                         )
                     )
                 )
-            ), 3, 2
+            ), 2, 1
         )
 
-        val robotState = RobotState(RobotId.first, Point.origin(), Orientation.Up, 0)
+        val robotState = RobotState(RobotId.first, Point(0, 0), Orientation.Up, 0)
         val gameState = GameState(
             gameBoard.cells,
             MapSize(gameBoard.width, gameBoard.height),
@@ -40,7 +34,85 @@ class DFSAnalyzerTest {
             listOf(),
             listOf())
         val analyzer = DFSAnalyzer.analyze(gameBoard)
-        val listOfActions = analyzer.invoke(gameState)
-        println(listOfActions)
+
+        val firstMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.MoveRight, firstMove)
+
+        // After Robot moved to the right, we need to update its curr position
+        gameState.updateRobotPosition(RobotId.first, Point(1, 0))
+
+        val secondMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.MoveLeft, secondMove)
+    }
+
+    @Test
+    fun testTwoNodesStart01moveTo00() {
+        var gameBoard = GameBoard(
+            TreePVector.from(
+                listOf(
+                    TreePVector.from(
+                        listOf(
+                            Node(Point(0, 0), false)
+                        )
+                    ),
+                    TreePVector.from(
+                        listOf(
+                            Node(Point(1, 0), false)
+                        )
+                    )
+                )
+            ), 2, 1
+        )
+
+        val robotState = RobotState(RobotId.first, Point(1, 0), Orientation.Up, 0)
+        val gameState = GameState(
+            gameBoard.cells,
+            MapSize(gameBoard.width, gameBoard.height),
+            mapOf(RobotId.first to robotState),
+            listOf(),
+            listOf())
+        val analyzer = DFSAnalyzer.analyze(gameBoard)
+
+        val firstMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.MoveLeft, firstMove)
+
+        // After Robot moved to the left, we need to update its curr position
+        gameState.updateRobotPosition(RobotId.first, Point(1, 0))
+
+        val secondMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.MoveRight, secondMove)
+    }
+
+    @Test
+    fun testOneNodesStart00doNothing() {
+        var gameBoard = GameBoard(
+            TreePVector.from(
+                listOf(
+                    TreePVector.from(
+                        listOf(
+                            Node(Point(0, 0), false)
+                        )
+                    )
+                )
+            ), 1, 1
+        )
+
+        val robotState = RobotState(RobotId.first, Point(0, 0), Orientation.Up, 0)
+        val gameState = GameState(
+            gameBoard.cells,
+            MapSize(gameBoard.width, gameBoard.height),
+            mapOf(RobotId.first to robotState),
+            listOf(),
+            listOf())
+        val analyzer = DFSAnalyzer.analyze(gameBoard)
+
+        val firstMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.DoNothing, firstMove)
+
+        // After Robot moved to the right, we need to update its curr position
+        gameState.updateRobotPosition(RobotId.first, Point(0, 0))
+
+        val secondMove = analyzer.invoke(gameState).iterator().next()
+        Assertions.assertEquals(Action.DoNothing, secondMove)
     }
 }
