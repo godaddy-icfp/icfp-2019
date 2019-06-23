@@ -81,6 +81,60 @@ internal class ActionStateTransitionEngineKtTests {
     }
 
     @Test
+    fun verifyDrill() {
+
+        val problem = """
+        ..X..
+        @lX..
+        ..X..
+    """.toProblem()
+        val gameState = GameState.gameStateOf(problem)
+
+        val actions = listOf(
+            Action.MoveRight, Action.StartDrill, Action.MoveRight, Action.MoveRight, Action.MoveRight
+        )
+        val expectedProblem = """
+        ..X..
+        wwwww
+        ..X..
+    """.toProblem()
+
+        actions.applyTo(gameState).let { state ->
+            printBoard(state)
+            Assertions.assertEquals(expectedProblem.map, state.cells)
+        }
+    }
+
+    @Test
+    fun verifyTeleport() {
+
+        val problem = """
+        .....
+        r....
+        @....
+    """.toProblem()
+        val gameState = GameState.gameStateOf(problem)
+
+        val actions = listOf(
+            Action.MoveUp, Action.MoveUp, Action.MoveRight, Action.MoveRight,
+            Action.MoveRight, Action.MoveRight, Action.PlantTeleportResetPoint,
+            Action.MoveDown, Action.MoveDown, Action.MoveLeft, Action.MoveLeft,
+            Action.TeleportBack(Point(4, 2)), Action.MoveLeft, Action.MoveDown,
+            Action.MoveLeft, Action.MoveLeft, Action.MoveDown
+        )
+        val expectedProblem = """
+        wwww*
+        wwwww
+        wwwww
+    """.toProblem()
+
+        actions.applyTo(gameState).let { state ->
+            printBoard(state)
+            Assertions.assertEquals(expectedProblem.map, state.cells)
+        }
+    }
+
+    @Test
     fun verifyWrapping() {
 
         val problem = """

@@ -10,6 +10,14 @@ fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameSta
             Action.MoveDown -> move(robotId, Point::down)
             Action.MoveLeft -> move(robotId, Point::left)
             Action.MoveRight -> move(robotId, Point::right)
+            Action.DoNothing -> this
+            Action.TurnClockwise -> updateRobot(robotId) {
+                copy(orientation = orientation.turnClockwise())
+            }
+            Action.TurnCounterClockwise -> updateRobot(robotId) {
+                copy(orientation = orientation.turnCounterClockwise())
+            }
+            // TODO need to remove items from the game state after use
             Action.AttachFastWheels -> updateRobot(robotId) {
                 copy(remainingFastWheelTime = this.remainingFastWheelTime + 50)
             }
@@ -20,17 +28,11 @@ fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameSta
                 currentPosition,
                 get(currentPosition).copy(hasTeleporterPlanted = true)
             )
+            Action.CloneRobot -> addRobot()
+
             is Action.TeleportBack -> updateRobot(robotId) {
                 copy(currentPosition = action.targetResetPoint)
             }
-            Action.DoNothing -> this
-            Action.TurnClockwise -> updateRobot(robotId) {
-                copy(orientation = orientation.turnClockwise())
-            }
-            Action.TurnCounterClockwise -> updateRobot(robotId) {
-                copy(orientation = orientation.turnCounterClockwise())
-            }
-            Action.CloneRobot -> addRobot()
             is Action.AttachManipulator -> TODO()
         }
     }

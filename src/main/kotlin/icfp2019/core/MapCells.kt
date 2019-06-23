@@ -7,7 +7,12 @@ import org.pcollections.PVector
 typealias MapCells = PVector<PVector<Node>>
 
 fun MapCells.get(point: Point): Node {
-    return this[point.x][point.y]
+    try {
+        return this[point.x][point.y]
+    } catch (e: Exception) {
+        println("Point $point")
+        throw e
+    }
 }
 
 fun MapCells.update(point: Point, node: Node): MapCells {

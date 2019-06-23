@@ -22,6 +22,7 @@ fun boardString(cells: Cells, size: MapSize, startingPosition: Point, path: Set<
         val row = (0 until size.x).map { x ->
             val node = cells[x][y]
             when {
+                node.hasTeleporterPlanted -> '*'
                 node.isWrapped -> 'w'
                 startingPosition == Point(x, y) -> '@'
                 node.isObstacle -> 'X'
@@ -75,6 +76,7 @@ fun parseTestMap(map: String): Problem {
                 'w' -> Node(point, isObstacle = false, isWrapped = true)
                 '.' -> Node(point, isObstacle = false)
                 '@' -> Node(point, isObstacle = false)
+                '*' -> Node(point, isObstacle = false, hasTeleporterPlanted = true, isWrapped = true)
                 in Booster.parseChars -> Node(point, isObstacle = false, booster = Booster.fromChar(char))
                 else -> throw IllegalArgumentException("Unknown Char '$char'")
             }
