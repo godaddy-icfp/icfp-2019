@@ -17,17 +17,16 @@ class EatCloserThenFarther : Strategy {
             // val currentDistance = distanceToWallsAnalyzer(0, state)
 
             val allMoves = listOf(
-                0 to (Action.MoveUp to state.robotState.getValue(robotId).currentPosition.up()),
-                1 to (Action.MoveRight to state.robotState.getValue(robotId).currentPosition.right()),
-                2 to (Action.MoveDown to state.robotState.getValue(robotId).currentPosition.down()),
-                3 to (Action.MoveLeft to state.robotState.getValue(robotId).currentPosition.left())
-            )
+                    0 to (Action.MoveUp to state.robotState.getValue(robotId).currentPosition.up()),
+                    1 to (Action.MoveRight to state.robotState.getValue(robotId).currentPosition.right()),
+                    2 to (Action.MoveDown to state.robotState.getValue(robotId).currentPosition.down()),
+                    3 to (Action.MoveLeft to state.robotState.getValue(robotId).currentPosition.left()))
 
             // [Index, GameState]
             val movesWithinGameboard = allMoves
                 .filter { state.mapSize.pointInMap(it.second.second) }
                 .map { it.first to applyAction(state, robotId, it.second.first) }
-            // [Index, distance]
+
             val movesAvoidingObstacles = movesWithinGameboard
                 .map { it.first to distanceToWallsAnalyzer(robotId, it.second) }
                 .filter { it.second != DistanceToWalls.obstacleIdentifier }
@@ -39,15 +38,14 @@ class EatCloserThenFarther : Strategy {
                 .none { !state.get(allMoves[it].second.second).isWrapped }
 
             val maxDistance = Int.MAX_VALUE
-            val wrappedUnwrapped = GetNumberOfWrappedOrNot.analyze(initialState)(RobotId.first, state)
+            val wrappedUnwrapped = GetNumberOfWrappedOrNot.analyze(initialState)(robotId, state)
             val distance = if (allWrapped) {
                 maxDistance
             } else {
                 wrappedUnwrapped.unwrapped
             }
             val result = if (allWrapped) {
-                movesAvoidingObstacles
-                    .maxBy { it.second }
+                movesAvoidingObstacles.maxBy { it.second }
             } else {
                 movesAvoidingObstacles
                     .filter { !state.get(allMoves[it.first].second.second).isWrapped }
