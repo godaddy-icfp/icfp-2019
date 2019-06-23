@@ -1,16 +1,13 @@
 package icfp2019.strategies
 
-import icfp2019.Direction
 import icfp2019.analyzers.DistanceToWalls
-import icfp2019.core.DistanceEstimate
 import icfp2019.model.GameBoard
 import icfp2019.model.GameState
-import icfp2019.core.Proposal
 import icfp2019.core.Strategy
 import icfp2019.model.Action
 
 class EatCloserThenFarther : Strategy {
-    override fun compute(map: GameBoard): (state: GameState) -> Proposal {
+    override fun compute(map: GameBoard): (state: GameState) -> Iterable<Action> {
         val distanceToWallsAnalyzer = DistanceToWalls().analyze(map)
         return { state ->
             // Assume one robot only
@@ -49,9 +46,11 @@ class EatCloserThenFarther : Strategy {
             }
 
             if (result != null) {
-                Proposal(DistanceEstimate(0), points[result.first].second.first)
+                //Proposal(DistanceEstimate(0), points[result.first].second.first)
+                listOf(points[result.first].second.first)
             } else {
-                Proposal(DistanceEstimate(0), Action.DoNothing)
+                //Proposal(DistanceEstimate(0), Action.DoNothing)
+                listOf(Action.DoNothing)
             }
         }
     }
