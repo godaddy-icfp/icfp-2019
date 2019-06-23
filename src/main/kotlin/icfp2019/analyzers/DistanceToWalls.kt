@@ -28,7 +28,7 @@ class DistanceToWalls : Analyzer2<Int> {
         return ret
     }
 
-    override fun analyze(map: GameBoard): (robotIndex : Int, state: GameState) -> Int {
+    override fun analyze(map: GameBoard): (robotIndex: Int, state: GameState) -> Int {
         val distanceBoard = applyDistanceAlgorithm(map.cells)
         return { robotIndex, state ->
             val robot = state.robotStateList[robotIndex]

@@ -23,7 +23,7 @@ data class GameState(
             )
     }
 
-    private fun updateRobotWithPoint(requested : Int, point : Point): List<RobotState> {
+    private fun updateRobotWithPoint(requested: Int, point: Point): List<RobotState> {
         return this.robotStateList.mapIndexed { index, robotState ->
             if (index == requested) {
                 robotState.copy(currentPosition = point)
@@ -34,7 +34,7 @@ data class GameState(
     }
 
     // Given a robot and a point, return new state
-    fun applyRobotPoint(robotIndex : Int, point : Point): GameState {
+    fun applyRobotPoint(robotIndex: Int, point: Point): GameState {
         return this.copy(robotStateList = updateRobotWithPoint(robotIndex, point))
     }
 }

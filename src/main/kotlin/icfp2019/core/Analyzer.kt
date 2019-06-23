@@ -8,5 +8,5 @@ interface Analyzer<T> {
 }
 
 interface Analyzer2<T> {
-    fun analyze(map: GameBoard): (robotIndex : Int, state: GameState) -> T
+    fun analyze(map: GameBoard): (robotIndex: Int, state: GameState) -> T
 }
