@@ -14,9 +14,10 @@ fun main(args: Array<String>) {
             val timeElapsed = measureTimeMillis {
                 print("Running ${it.name}... ")
                 val problem = parseDesc(it.readText(), it.name)
-                val solution = brain(problem, listOf(DFSStrategy), 1)
-                File(it.parent, "${it.nameWithoutExtension}.sol").writeText(solution.toString())
-                summary = solution.summary()
+                brain(problem, listOf(DFSStrategy), 1).forEach { solution ->
+                    summary = solution.summary()
+                    File(it.parentFile, "${it.nameWithoutExtension}.sol").writeText(solution.toString())
+                }
             }
             val logSummary = "$summary in ${timeElapsed}ms\n"
             print(logSummary)
