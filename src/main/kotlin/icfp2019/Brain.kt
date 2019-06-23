@@ -2,10 +2,12 @@ package icfp2019
 
 import icfp2019.core.Strategy
 import icfp2019.core.applyAction
-import icfp2019.model.*
+import icfp2019.model.Action
+import icfp2019.model.GameState
+import icfp2019.model.Problem
+import icfp2019.model.RobotId
 
 fun brainStep(
-    gameBoard: GameBoard,
     initialGameState: GameState,
     strategies: Iterable<Strategy>
 ): Pair<GameState, Map<RobotId, Action>> {
@@ -24,7 +26,7 @@ fun brainStep(
         val winner = workingSet
             .flatMap { robotId ->
                 // TODO: advance for robotId
-                strategies.map { robotId to it.compute(gameBoard)(gameState) }
+                strategies.map { robotId to it.compute(gameState)(robotId, gameState) }
             }.minBy { it.second }!!
 
         // we have a winner, remove it from the working set for this time step
@@ -38,12 +40,10 @@ fun brainStep(
 }
 
 fun brain(problem: Problem, strategies: Iterable<Strategy>): String {
-    val gameBoard = GameBoard(problem)
     var gameState = GameState.gameStateOf(problem)
     val actions = mutableMapOf<RobotId, List<Action>>()
-
     while (!gameState.isGameComplete()) {
-        val (newState, newActions) = brainStep(gameBoard, gameState, strategies)
+        val (newState, newActions) = brainStep(gameState, strategies)
 
         gameState = newState
         newActions.forEach { (robotId, action) ->
