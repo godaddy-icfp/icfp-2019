@@ -1,6 +1,10 @@
 package icfp2019.analyzers
 
 import icfp2019.*
+import icfp2019.model.DrillState
+import icfp2019.model.GameBoard
+import icfp2019.model.GameState
+import icfp2019.model.Point
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

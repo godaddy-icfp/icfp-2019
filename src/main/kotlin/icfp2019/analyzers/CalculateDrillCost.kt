@@ -2,6 +2,10 @@ package icfp2019.analyzers
 
 import icfp2019.*
 import icfp2019.core.Analyzer
+import icfp2019.model.DrillState
+import icfp2019.model.GameBoard
+import icfp2019.model.GameState
+import icfp2019.model.Node
 import org.pcollections.PVector
 
 
