@@ -1,11 +1,11 @@
 package icfp2019
 
-import icfp2019.analyzers.DistanceToWalls
 import icfp2019.model.*
+import icfp2019.strategies.EatCloserThenFarther
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class DistanceToWallsTests {
+class EatCloserThenFatherTests {
     @Test
     fun testSimple() {
         val problem3Input =
@@ -20,10 +20,9 @@ class DistanceToWallsTests {
 
         val p = parseDesc(problem3Input)
         val g = GameBoard(p.map, p.size.x, p.size.y)
-        val analyzer = DistanceToWalls().analyze(g)
-        val r1 = analyzer(0, GameState(listOf(RobotState(RobotId(0), Point(20, 0))), listOf(), listOf()))
-        Assertions.assertEquals(8, r1)
-        val r2 = analyzer(0, GameState(listOf(RobotState(RobotId(0), Point(22, 0))), listOf(), listOf()))
-        Assertions.assertEquals(6, r2)
+        val s = EatCloserThenFarther().compute(g)
+        val gs1 = GameState(listOf(RobotState(RobotId(0), Point(20, 0))), listOf(), listOf())
+        val m1 = s(gs1)
+        Assertions.assertEquals(Action.MoveRight, m1.nextMove)
     }
 }
