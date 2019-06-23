@@ -1,12 +1,13 @@
 package icfp2019
 
+import icfp2019.analyzers.DistanceToWalls
+import icfp2019.model.*
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class DrillTests {
-
+class DistanceToWallsTests {
     @Test
-    fun testGetTotalDrillRequired() {
-
+    fun testSimple() {
         val problem3Input =
             "(15,23),(16,23),(16,17),(15,17),(15,20),(12,20),(12,19),(10,19),(10,16),(12,16),(12,17),(13,17)," +
                     "(13,14),(14,14),(14,8),(16,8),(16,15),(18,15),(18,0),(27,0),(27,15),(22,15),(22,23),(19,23)," +
@@ -18,23 +19,16 @@ class DrillTests {
                     "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
         val p = parseDesc(problem3Input)
-        // In the right direction
-        val drillDistRight = buildDrillRequiredFromEachNode(p)
-        printBoard(drillDistRight)
-    }
+        val g = GameBoard(p.map, p.size.x, p.size.y)
+        val analyzer = DistanceToWalls().analyze(g)
+        val firstRobotState = RobotState(RobotId(0), Point(20, 0))
+        val r1 = analyzer(GameState(firstRobotState, listOf(firstRobotState), listOf(), listOf()))
+        Assertions.assertEquals(1, r1.size)
+        Assertions.assertEquals(8, r1[0])
 
-    private fun printBoard(map: Array<Array<Array<DrillState>>>) {
-        println("${map.size} ${map[0].size}")
-        val maxX = map.size
-        val maxY = map[0].size
-        for (y in (maxY - 1) downTo 0) {
-            for (x in 0 until maxX) {
-                for (ds in map[x][y]) {
-                    print("(" + ds.direction + "," + ds.value + ")")
-                    print("|")
-                }
-            }
-            println()
-        }
+        val secondRobotState = RobotState(RobotId(0), Point(22, 0))
+        val r2 = analyzer(GameState(secondRobotState, listOf(secondRobotState), listOf(), listOf()))
+        Assertions.assertEquals(1, r2.size)
+        Assertions.assertEquals(6, r2[0])
     }
 }
