@@ -1,10 +1,13 @@
-package icfp2019
+package icfp2019.model
 
+import icfp2019.parseDesc
 import org.junit.jupiter.api.Test
 
-class DistanceAlgorithmTests {
+class DrillTests {
+
     @Test
-    fun testDistance() {
+    fun testGetTotalDrillRequired() {
+
         val problem3Input =
             "(15,23),(16,23),(16,17),(15,17),(15,20),(12,20),(12,19),(10,19),(10,16),(12,16),(12,17),(13,17)," +
                     "(13,14),(14,14),(14,8),(16,8),(16,15),(18,15),(18,0),(27,0),(27,15),(22,15),(22,23),(19,23)," +
@@ -16,18 +19,21 @@ class DistanceAlgorithmTests {
                     "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
         val p = parseDesc(problem3Input)
-        val ret = applyDistanceAlgorithm(p.map)
-        printBoard(ret)
+        // In the right direction
+        val drillDistRight = buildDrillRequiredFromEachNode(p)
+        printBoard(drillDistRight)
     }
 
-    private fun printBoard(map: List<List<Int>>) {
+    private fun printBoard(map: Array<Array<Array<DrillState>>>) {
         println("${map.size} ${map[0].size}")
         val maxX = map.size
         val maxY = map[0].size
         for (y in (maxY - 1) downTo 0) {
             for (x in 0 until maxX) {
-                print("%02d".format(map[x][y]))
-                print(' ')
+                for (ds in map[x][y]) {
+                    print("(" + ds.direction + "," + ds.value + ")")
+                    print("|")
+                }
             }
             println()
         }

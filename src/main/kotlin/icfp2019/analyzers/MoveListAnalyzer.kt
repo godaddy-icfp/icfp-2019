@@ -8,7 +8,6 @@ object MoveListAnalyzer : Analyzer<(RobotId) -> List<Action>> {
         return { gameState ->
             { robotId ->
                 val moves = mutableListOf<Action>()
-
                 fun checkCanDoAction(action: Action) {
                     if (MoveAnalyzer.analyze(map)(gameState)(robotId, action)) {
                         moves.add(action)
@@ -31,7 +30,6 @@ object MoveListAnalyzer : Analyzer<(RobotId) -> List<Action>> {
                 checkCanDoAction(Action.PlantTeleportResetPoint)
 
                 // Need to check add manipulator at allowable points
-
                 moves
             }
         }
