@@ -1,6 +1,5 @@
 package icfp2019
 
-import icfp2019.analyzers.DFSAnalyzer
 import icfp2019.model.*
 import icfp2019.strategies.DFSStrategy
 import java.io.File
