@@ -3,7 +3,6 @@ package icfp2019.strategies
 import icfp2019.analyzers.DistanceToWalls
 import icfp2019.core.DistanceEstimate
 import icfp2019.core.Proposal
-import icfp2019.model.GameBoard
 import icfp2019.model.GameState
 import icfp2019.core.Strategy2
 import icfp2019.core.applyAction
