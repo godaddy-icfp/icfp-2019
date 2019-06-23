@@ -17,7 +17,7 @@ internal class ConservativeDistanceAnalyzerTests {
             GameBoard.gameBoardOf(
                 problem
             )
-        ).invoke(GameState.empty(Point.origin()))
+        ).invoke(GameState.gameStateOf(Point.origin()))
         val result = analyzer(problem.startingPosition)
         println(result.estimate)
         printBoard(problem, result.pathNodes)
