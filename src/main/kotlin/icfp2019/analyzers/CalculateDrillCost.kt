@@ -8,7 +8,6 @@ import icfp2019.model.GameState
 import icfp2019.model.Node
 import org.pcollections.PVector
 
-
 object CalculateDrillCost : Analyzer<List<Array<DrillState>>> {
     override fun analyze(map: GameBoard): (state: GameState) -> List<Array<DrillState>> {
 
@@ -20,7 +19,7 @@ object CalculateDrillCost : Analyzer<List<Array<DrillState>>> {
         }
     }
 
-    private fun buildDrillRequiredFromEachNode(currentGrid : PVector<PVector<Node>>): Array<Array<Array<DrillState>>> {
+    private fun buildDrillRequiredFromEachNode(currentGrid: PVector<PVector<Node>>): Array<Array<Array<DrillState>>> {
 
         val xMax = currentGrid.size
         val yMax = currentGrid[0].size

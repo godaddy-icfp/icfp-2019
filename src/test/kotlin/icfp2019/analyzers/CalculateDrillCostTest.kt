@@ -8,7 +8,6 @@ import icfp2019.model.Point
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-
 class CalculateDrillCostTest {
 
     @Test
