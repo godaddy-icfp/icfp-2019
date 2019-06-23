@@ -7,15 +7,14 @@ import icfp2019.model.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-import java.lang.IllegalStateException
 import java.util.*
 
 internal class BrainKtTest {
     class TestStrategy(vararg actions: Action) : Strategy {
         private val queue = ArrayDeque(actions.toList())
 
-        override fun compute(map: GameBoard): (state: GameState) -> Proposal {
-            return {
+        override fun compute(initialState: GameState): (robotId: RobotId, state: GameState) -> Proposal {
+            return { _, _ ->
                 if (queue.isEmpty()) {
                     Proposal(DistanceEstimate(0), Action.DoNothing)
                 } else {

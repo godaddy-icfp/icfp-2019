@@ -5,7 +5,10 @@ import icfp2019.analyzers.GetNumberOfWrappedOrNot
 import icfp2019.core.DistanceEstimate
 import icfp2019.core.Strategy
 import icfp2019.core.applyAction
-import icfp2019.model.*
+import icfp2019.model.Action
+import icfp2019.model.GameState
+import icfp2019.model.Problem
+import icfp2019.model.RobotId
 
 fun strategySequence(
     initialGameState: GameState,
@@ -16,8 +19,7 @@ fun strategySequence(
     return generateSequence(
         seed = initialGameState to initialAction,
         nextFunction = { (gameState, _) ->
-            val gameBoard = GameBoard(gameState.cells, gameState.mapSize.x, gameState.mapSize.y)
-            val nextAction = strategy.compute(gameBoard)(gameState).nextMove
+            val nextAction = strategy.compute(gameState)(robotId, gameState).nextMove
             val nextState = applyAction(gameState, robotId, nextAction)
             nextState to nextAction
         }
@@ -44,8 +46,7 @@ fun Sequence<Pair<GameState, Action>>.score(
     // steps required to completely wrap the remainder of the mine
     val point = final.robotState.getValue(robotId).currentPosition
     val gameState = initial.first
-    val gameBoard = GameBoard(gameState.cells, gameState.mapSize.x, gameState.mapSize.y)
-    val conservativeDistance = ConservativeDistanceAnalyzer.analyze(gameBoard)(final)(point)
+    val conservativeDistance = ConservativeDistanceAnalyzer.analyze(gameState)(robotId, final)(point)
 
     // return the initial game state, if this path is the winner
     // we can use this to avoid duplicate action evaluation
@@ -108,7 +109,7 @@ fun brain(
     val actions = mutableMapOf<RobotId, List<Action>>()
     val getNumberOfWrapped = GetNumberOfWrappedOrNot.analyze(gameState)
     fun isNotFinished(gameState: GameState): Boolean {
-        return getNumberOfWrapped(gameState).unwrapped > 0
+        return getNumberOfWrapped(RobotId.first, gameState).unwrapped > 0
     }
 
     while (isNotFinished(gameState)) {
