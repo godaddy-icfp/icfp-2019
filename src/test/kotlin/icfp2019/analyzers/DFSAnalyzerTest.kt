@@ -1,7 +1,6 @@
 package icfp2019.analyzers
 
 import icfp2019.model.*
-import jdk.nashorn.internal.ir.annotations.Ignore
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
@@ -162,7 +161,7 @@ class DFSAnalyzerTest {
 
         gameState.updateRobotPosition(RobotId.first, Point(0, 1))
 
-        //backtracking to its initial position
+        // backtracking to its initial position
         val fourMove = analyzer.invoke(gameState).iterator().next()
         Assertions.assertEquals(Action.DoNothing, fourMove)
     }

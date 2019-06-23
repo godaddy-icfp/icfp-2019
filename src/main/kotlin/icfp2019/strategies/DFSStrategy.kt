@@ -31,7 +31,7 @@ object DFSStrategy : Strategy {
 
             if (it.hasNext()) {
                 currNode.isWrapped = true
-                val nextNeighbor  = it.next()
+                val nextNeighbor = it.next()
                 Proposal(DistanceEstimate(0), currPoint.actionToGetToNeighbor(nextNeighbor.point))
             } else {
                 // This only happens if the graph has only one node
