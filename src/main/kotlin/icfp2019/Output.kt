@@ -1,5 +1,8 @@
 package icfp2019
 
+import icfp2019.model.Action
+import icfp2019.model.RobotId
+
 /*  
 A solution for a task
   prob-NNN.desc
@@ -30,7 +33,7 @@ class Output {
         fun encodeActions(actions: Iterable<Action>): String =
             actions.joinToString(separator = "") { it.toSolutionString() }
 
-        fun encodeRobotActions(robotActions: Map<RobotId, List<Action>>): String =
+        fun encodeRobotActions(robotActions: Map<RobotId, Iterable<Action>>): String =
             robotActions.entries.sortedBy { it.key.id }
                 .joinToString(separator = "#") { encodeActions(it.value) }
     }

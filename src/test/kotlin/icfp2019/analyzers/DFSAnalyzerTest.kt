@@ -1,17 +1,12 @@
 package icfp2019.analyzers
 
-import icfp2019.model.GameBoard
-import icfp2019.model.GameState
-import icfp2019.model.Node
-import icfp2019.model.Point
-import org.junit.jupiter.api.Assertions
+import icfp2019.model.*
 import org.junit.jupiter.api.Test
 import org.pcollections.TreePVector
 
-class ShortestPathUsingDijkstraTest {
-
+class DFSAnalyzerTest {
     @Test
-    fun testShortestDistanceToPoint() {
+    fun testDfsAnalyzerTest() {
         var gameBoard = GameBoard(
             TreePVector.from(
                 listOf(
@@ -37,18 +32,10 @@ class ShortestPathUsingDijkstraTest {
             ), 3, 2
         )
 
-        val graph = ShortestPathUsingDijkstra
-            .analyze(gameBoard)(GameState.gameStateOf(Point(0, 0)))
-            .getPath(
-                Node(Point(0, 0), false),
-                Node(Point(2, 1), false)
-            )
-
-        Assertions.assertEquals(graph.vertexList, listOf(
-            Node(Point(0, 0), false),
-            Node(Point(0, 1), false),
-            Node(Point(1, 1), false),
-            Node(Point(2, 1), false)
-        ))
+        val robotState = RobotState(RobotId(0), Point(0, 0), Orientation.Up, 0)
+        val gameState = GameState(listOf(robotState), listOf(), listOf())
+        val analyzer = DFSAnalyzer.analyze(gameBoard)
+        val listOfActions = analyzer.invoke(gameState)
+        println(listOfActions)
     }
 }
