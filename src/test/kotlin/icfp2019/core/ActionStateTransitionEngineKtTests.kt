@@ -4,6 +4,7 @@ import icfp2019.model.Action
 import icfp2019.model.GameState
 import icfp2019.model.Point
 import icfp2019.model.RobotId
+import icfp2019.parseTestMap
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -30,5 +31,39 @@ internal class ActionStateTransitionEngineKtTests {
             startingPosition,
             backToOrigin.robotState.getValue(RobotId.first).currentPosition
         )
+    }
+
+    @Test
+    fun verifyWrapping() {
+
+        val testMap = """
+        ...XX
+        .....
+        @..XX
+    """.trimIndent()
+        val problem = parseTestMap(testMap)
+        val gameState = GameState.gameStateOf(problem)
+
+        val actions = listOf(
+            Action.Initialize, Action.MoveUp, Action.MoveUp,
+            Action.MoveRight, Action.MoveDown, Action.MoveDown,
+            Action.MoveRight, Action.MoveUp, Action.MoveUp,
+            Action.MoveDown, Action.MoveRight
+        )
+        val expectedMap = """
+        wwwXX
+        wwww.
+        wwwXX
+    """.trimIndent()
+
+        actions.applyTo(gameState).let {
+            Assertions.assertEquals(parseTestMap(expectedMap).map, it.cells)
+        }
+    }
+
+    private fun List<Action>.applyTo(gameState: GameState): GameState {
+        return this.fold(gameState) { state, action ->
+            applyAction(state, RobotId.first, action)
+        }
     }
 }
