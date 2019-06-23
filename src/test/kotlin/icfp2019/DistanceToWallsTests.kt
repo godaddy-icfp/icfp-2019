@@ -1,6 +1,7 @@
 package icfp2019
 
 import icfp2019.analyzers.DistanceToWalls
+import icfp2019.model.*
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
