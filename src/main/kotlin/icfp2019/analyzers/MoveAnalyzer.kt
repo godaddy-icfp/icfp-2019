@@ -23,22 +23,23 @@ object MoveAnalyzer : Analyzer<(RobotId, Action) -> Boolean> {
                     map.isInBoard(robotState.currentPosition)) {
                     val cell = map.get(robotState.currentPosition)
 
-                    fun canMoveTo(point: Point): Boolean {
-                        return map.isInBoard(point) && !cell.isObstacle
-                    }
-
-                    fun canTeleportTo(point: Point): Boolean {
-                        for (location: Point in gameState.teleportDestination) {
-                            if (location == point) {
+                    fun hasBooster(booster: Booster): Boolean {
+                        for (possibleBooster: Booster in gameState.unusedBoosters) {
+                            if (booster == possibleBooster) {
                                 return true
                             }
                         }
                         return false
                     }
 
-                    fun hasBooster(booster: Booster): Boolean {
-                        for (possibleBooster: Booster in gameState.unusedBoosters) {
-                            if (booster == possibleBooster) {
+                    fun canMoveTo(point: Point): Boolean {
+                        return map.isInBoard(point) &&
+                                (!cell.isObstacle || hasBooster(Booster.Drill))
+                    }
+
+                    fun canTeleportTo(point: Point): Boolean {
+                        for (location: Point in gameState.teleportDestination) {
+                            if (location == point) {
                                 return true
                             }
                         }
