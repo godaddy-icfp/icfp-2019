@@ -22,7 +22,7 @@ fun strategySequence(
             val nextState = applyAction(gameState, robotId, nextAction)
             nextState to nextAction
         }
-    ).drop(1)
+    ).drop(1) // skip the initial state
 }
 
 data class BrainScore(
@@ -72,7 +72,7 @@ fun brainStep(
     var gameState = initialGameState
     val actions = mutableMapOf<RobotId, Action>()
     val workingSet = gameState.robotState.keys.toMutableSet()
-    while (workingSet.isNotEmpty()) {
+    while (!gameState.isGameComplete() && workingSet.isNotEmpty()) {
         // pick the minimum across all robot/strategy pairs
         val winner = workingSet
             .flatMap { robotId ->

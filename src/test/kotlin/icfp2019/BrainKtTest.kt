@@ -39,7 +39,6 @@ internal class BrainKtTest {
             val (result, actions) = brainStep(
                 state,
                 strategies,
-                { true },
                 1
             )
 
