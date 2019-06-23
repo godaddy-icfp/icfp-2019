@@ -1,7 +1,6 @@
 package icfp2019
 
 import icfp2019.analyzers.ConservativeDistanceAnalyzer
-import icfp2019.analyzers.GetNumberOfWrappedOrNot
 import icfp2019.core.DistanceEstimate
 import icfp2019.core.Strategy
 import icfp2019.core.applyAction
@@ -61,7 +60,6 @@ fun Sequence<Pair<GameState, Action>>.score(
 fun brainStep(
     initialGameState: GameState,
     strategies: Iterable<Strategy>,
-    unwrappedRemaining: (GameState) -> Boolean,
     maximumSteps: Int
 ): Pair<GameState, Map<RobotId, Action>> {
 
@@ -78,12 +76,11 @@ fun brainStep(
         // pick the minimum across all robot/strategy pairs
         val winner = workingSet
             .flatMap { robotId ->
-                // TODO: advance for robotId
                 strategies
                     .map { strategy ->
                         strategySequence(gameState, strategy, robotId)
                             .take(maximumSteps)
-                            .takeWhile { unwrappedRemaining(it.first) }
+                            .takeWhile { !it.first.isGameComplete() }
                             .score(robotId, strategy)
                     }
             }
@@ -107,13 +104,8 @@ fun brain(
 ): String {
     var gameState = GameState.gameStateOf(problem)
     val actions = mutableMapOf<RobotId, List<Action>>()
-    val getNumberOfWrapped = GetNumberOfWrappedOrNot.analyze(gameState)
-    fun isNotFinished(gameState: GameState): Boolean {
-        return getNumberOfWrapped(RobotId.first, gameState).unwrapped > 0
-    }
-
-    while (isNotFinished(gameState)) {
-        val (newState, newActions) = brainStep(gameState, strategies, ::isNotFinished, maximumSteps)
+    while (!gameState.isGameComplete()) {
+        val (newState, newActions) = brainStep(gameState, strategies, maximumSteps)
 
         gameState = newState
         newActions.forEach { (robotId, action) ->
