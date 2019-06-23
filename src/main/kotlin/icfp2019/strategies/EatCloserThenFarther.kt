@@ -25,9 +25,7 @@ class EatCloserThenFarther : Strategy2 {
 
             // [Index, GameState]
             val newStates = points
-                .filter {
-                    it.second.second.x >= 0 && it.second.second.x < state.mapSize.x &&
-                            it.second.second.y >= 0 && it.second.second.y < state.mapSize.y }
+                .filter { state.mapSize.pointInMap(it.second.second) }
                 .map { it.first to applyAction(state, initialRobot, it.second.first) }
             // [Index, distance]
             val newValues = newStates
