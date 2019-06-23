@@ -19,11 +19,9 @@ class EatCloserThenFatherTests {
                     "(21,14),(21,13),(20,13)#X(16,25);L(19,19);F(4,30);F(17,21);B(4,31)"
 
         val p = parseDesc(problem3Input)
-        val g = GameBoard(p.map, p.size.x, p.size.y)
-        val s = EatCloserThenFarther().compute(g)
-        val robotState = RobotState(RobotId(0), Point(20, 0))
-        val gs1 = GameState(listOf(robotState), listOf(), listOf())
-        val m1 = s(gs1)
-        Assertions.assertEquals(Action.MoveRight, m1.first())
+        val gs = GameState.gameStateOf(p, Point(20, 0))
+        val s = EatCloserThenFarther().compute(gs)
+        val m1 = s(gs)
+        Assertions.assertEquals(Action.MoveRight, m1.nextMove)
     }
 }

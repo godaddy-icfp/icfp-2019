@@ -1,8 +1,8 @@
 package icfp2019
 
+import icfp2019.analyzers.DFSAnalyzer
 import icfp2019.model.*
 import icfp2019.model.GameState.Companion.gameStateOf
-import icfp2019.strategies.EatCloserThenFarther
 import java.io.File
 import java.nio.file.Paths
 
@@ -21,8 +21,7 @@ fun main(args: Array<String>) {
 fun solve(problem: Problem): String {
     val gameBoard = GameBoard.gameBoardOf(problem)
     val gameState = gameStateOf(problem)
-    // val actions = DFSAnalyzer.analyze(gameBoard).invoke(gameState)
-    val actions = EatCloserThenFarther().compute(gameBoard).invoke(gameState)
+    val actions = DFSAnalyzer.analyze(gameBoard).invoke(gameState)
     return Output.encodeRobotActions(mapOf(Pair(RobotId(0), actions)))
 }
 
