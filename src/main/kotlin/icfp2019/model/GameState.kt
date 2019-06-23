@@ -6,7 +6,7 @@ import org.pcollections.TreePVector
 data class GameState(
     val cells: PVector<PVector<Node>>,
     val mapSize: MapSize,
-    val robotStateList: List<RobotState>,
+    val robotState: Map<RobotId, RobotState>,
     val teleportDestination: List<Point>,
     val unusedBoosters: List<Booster>
 ) {
@@ -16,17 +16,27 @@ data class GameState(
             GameState(
                 TreePVector.empty(),
                 MapSize(0, 0),
-                listOf(RobotState(RobotId(0), startingPosition)),
+                mapOf(RobotId.first to RobotState(RobotId.first, startingPosition)),
                 listOf(),
                 listOf()
             )
 
-        // Construct an initial game state from the problem spec
+        // Helper for constructing a game state from minimal description
+        fun gameStateOf(cells: PVector<PVector<Node>>, mapSize: MapSize, startingPosition: Point) =
+            GameState(
+                cells,
+                mapSize,
+                mapOf(RobotId.first to RobotState(RobotId.first, startingPosition)),
+                listOf(),
+                listOf()
+            )
+
+        // Construct an first game state from the problem spec
         fun gameStateOf(problem: Problem) =
             GameState(
                 problem.map,
                 problem.size,
-                listOf(RobotState(RobotId(0), problem.startingPosition)),
+                mapOf(RobotId.first to RobotState(RobotId.first, problem.startingPosition)),
                 listOf(),
                 listOf()
             )
@@ -35,7 +45,7 @@ data class GameState(
             GameState(
                 problem.map,
                 problem.size,
-                listOf(RobotState(RobotId(0), startingPosition)),
+                mapOf(RobotId.first to RobotState(RobotId.first, startingPosition)),
                 listOf(),
                 listOf()
             )
@@ -57,6 +67,6 @@ data class GameState(
             throw ArrayIndexOutOfBoundsException("Access out of game board")
         }
         val newCells = cells.with(point.x, cells[point.x].with(point.y, value))
-        return GameState(newCells, mapSize, robotStateList, teleportDestination, unusedBoosters)
+        return GameState(newCells, mapSize, robotState, teleportDestination, unusedBoosters)
     }
 }
