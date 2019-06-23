@@ -22,7 +22,7 @@ class EatCloserThenFatherTests {
         val g = GameBoard(p.map, p.size.x, p.size.y)
         val s = EatCloserThenFarther().compute(g)
         val robotState = RobotState(RobotId(0), Point(20, 0))
-        val gs1 = GameState(robotState, listOf(robotState), listOf(), listOf())
+        val gs1 = GameState(listOf(robotState), listOf(), listOf())
         val m1 = s(gs1)
         Assertions.assertEquals(Action.MoveRight, m1.first())
     }
