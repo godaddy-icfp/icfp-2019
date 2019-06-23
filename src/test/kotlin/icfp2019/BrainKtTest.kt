@@ -5,6 +5,7 @@ import icfp2019.core.Proposal
 import icfp2019.core.Strategy
 import icfp2019.model.*
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 import java.util.*
@@ -25,6 +26,7 @@ internal class BrainKtTest {
     }
 
     @Test
+    @Disabled
     fun brainStep() {
         val problem = parseTestMap(init)
         val solution = parseTestMap(fini)
