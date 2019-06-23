@@ -22,7 +22,7 @@ data class GameState(
             )
 
         // Helper for constructing a game state from minimal description
-        fun gameStateOf(cells: PVector<PVector<Node>>, mapSize : MapSize, startingPosition: Point) =
+        fun gameStateOf(cells: PVector<PVector<Node>>, mapSize: MapSize, startingPosition: Point) =
             GameState(
                 cells,
                 mapSize,
