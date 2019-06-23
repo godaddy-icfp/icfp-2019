@@ -7,6 +7,14 @@ data class Point(val x: Int, val y: Int) {
         }
     }
 
+    fun actionToGetToNeighbor(neighbor: Point): Action = when (neighbor) {
+        left() -> Action.MoveLeft
+        right() -> Action.MoveRight
+        up() -> Action.MoveUp
+        down() -> Action.MoveDown
+        else -> throw Exception("neighbor was not really a neighbor")
+    }
+
     fun isNeighbor(otherPoint: Point): Boolean = when (otherPoint) {
         left() -> true
         right() -> true
