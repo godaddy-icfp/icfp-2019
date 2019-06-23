@@ -113,5 +113,5 @@ fun brain(
         }
     }
 
-    return Solution(actions.toMap())
+    return Solution(problem, actions.toMap())
 }
