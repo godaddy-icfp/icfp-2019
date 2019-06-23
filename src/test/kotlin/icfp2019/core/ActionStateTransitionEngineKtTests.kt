@@ -2,9 +2,8 @@ package icfp2019.core
 
 import icfp2019.model.Action
 import icfp2019.model.GameState
-import icfp2019.model.Point
 import icfp2019.model.RobotId
-import icfp2019.parseTestMap
+import icfp2019.toProblem
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -12,9 +11,13 @@ internal class ActionStateTransitionEngineKtTests {
 
     @Test
     fun testApplyMove() {
-        val startingPosition = Point.origin()
-        val gameStateOf = GameState.gameStateOf(startingPosition)
-        val upRightState = applyAction(gameStateOf, RobotId.first, Action.MoveUp).let {
+        val problem = """
+                        ..
+                        @.
+                    """.toProblem()
+        val startingPosition = problem.startingPosition
+        val startingState = GameState.gameStateOf(problem)
+        val upRightState = applyAction(startingState, RobotId.first, Action.MoveUp).let {
             applyAction(it, RobotId.first, Action.MoveRight)
         }
 
@@ -36,12 +39,11 @@ internal class ActionStateTransitionEngineKtTests {
     @Test
     fun verifyWrapping() {
 
-        val testMap = """
+        val problem = """
         ...XX
         .....
         @..XX
-    """.trimIndent()
-        val problem = parseTestMap(testMap)
+    """.toProblem()
         val gameState = GameState.gameStateOf(problem)
 
         val actions = listOf(
@@ -50,14 +52,14 @@ internal class ActionStateTransitionEngineKtTests {
             Action.MoveRight, Action.MoveUp, Action.MoveUp,
             Action.MoveDown, Action.MoveRight
         )
-        val expectedMap = """
+        val expectedProblem = """
         wwwXX
         wwww.
         wwwXX
-    """.trimIndent()
+    """.toProblem()
 
         actions.applyTo(gameState).let {
-            Assertions.assertEquals(parseTestMap(expectedMap).map, it.cells)
+            Assertions.assertEquals(expectedProblem.map, it.cells)
         }
     }
 
