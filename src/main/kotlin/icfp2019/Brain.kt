@@ -1,6 +1,5 @@
 package icfp2019
 
-import icfp2019.analyzers.GetNumberOfWrappedOrNot
 import icfp2019.core.Strategy
 import icfp2019.core.applyAction
 import icfp2019.model.*
@@ -42,12 +41,8 @@ fun brain(problem: Problem, strategies: Iterable<Strategy>): String {
     val gameBoard = GameBoard(problem)
     var gameState = GameState.gameStateOf(problem)
     val actions = mutableMapOf<RobotId, List<Action>>()
-    val getNumberOfWrapped = GetNumberOfWrappedOrNot.analyze(gameState)
-    fun isNotFinished(gameState: GameState): Boolean {
-        return getNumberOfWrapped(gameState).unwrapped > 0
-    }
 
-    while (isNotFinished(gameState)) {
+    while (!gameState.isGameComplete()) {
         val (newState, newActions) = brainStep(gameBoard, gameState, strategies)
 
         gameState = newState
