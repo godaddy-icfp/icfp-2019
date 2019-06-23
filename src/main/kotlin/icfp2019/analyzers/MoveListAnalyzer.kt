@@ -1,6 +1,6 @@
 package icfp2019.analyzers
 
-import icfp2019.*
+import icfp2019.model.*
 import icfp2019.core.Analyzer
 
 object MoveListAnalyzer : Analyzer<(RobotId) -> List<Action>> {
