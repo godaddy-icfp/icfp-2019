@@ -14,41 +14,43 @@ object BFSStrategy : Strategy {
     override fun compute(initialState: GameState): (robotId: RobotId, state: GameState) -> Action {
         val graphBuilder = BoardCellsGraphAnalyzer.analyze(initialState)
         return { robotId, gameState ->
-            val unWrappedPoints = gameState.boardState().allStates().filter { !it.isWrapped }.map { it.point }
-            val graph = graphBuilder.invoke(robotId, gameState)
-            val currentPoint = gameState.robot(robotId).currentPosition
-            val currentNode = graph.vertexSet().filter { currentPoint == it.point }[0]
-
-            val unwrappedGraph =
-                AsSubgraph(
-                    graph,
-                    graph.vertexSet().filter { it.point in unWrappedPoints }.plus(currentNode).toSet()
-                )
-
-            val bfsIterator: GraphIterator<BoardCell, DefaultEdge> = BreadthFirstIterator(unwrappedGraph, currentNode)
-
-            val neighbors = currentNode.point.neighbors()
-                .filter { gameState.isInBoard(it) }
-                .map { gameState.get(it) }
-            if (neighbors.any {
-                    it.point in unWrappedPoints && it.isObstacle.not()
-                }) {
-                bfsIterator.next() // move past currentNode
-                val neighbor = bfsIterator.next().point
-                currentPoint.actionToGetToNeighbor(neighbor)
+            if (gameState.boostersAvailable(Booster.ExtraArm) > 0) {
+                Action.AttachManipulator(gameState.robot(robotId).optimumManipulatorArmTarget())
             } else {
-                val analyze = ShortestPathUsingDijkstra.analyze(gameState)
-                val shortestPathAlgorithm = analyze(robotId, gameState)
+                val currentPoint = gameState.robotState.values.first().currentPosition
+                val currentNode = graph.vertexSet().filter { currentPoint == it.point }[0]
 
-                val pathToClosestNode: GraphPath<BoardCell, DefaultEdge> = unwrappedGraph.vertexSet()
-                    .filter { it.point != currentNode.point }
-                    .filter { it.point in unWrappedPoints }
-                    .map { shortestPathAlgorithm.getPath(gameState.get(currentPoint), it) }
-                    .minBy { it.length }!!
+                val unwrappedGraph =
+                    AsSubgraph(
+                        graph,
+                        graph.vertexSet().filter { gameState.get(it.point).isWrapped.not() }.plus(currentNode).toSet()
+                    )
 
-                // pathToClosestNode.vertexList[0] is `currentNode`
-                val nextNode = pathToClosestNode.vertexList[1]
-                currentPoint.actionToGetToNeighbor(nextNode.point)
+                val bfsIterator: GraphIterator<Node, DefaultEdge> = BreadthFirstIterator(unwrappedGraph, currentNode)
+
+                val neighbors = currentNode.point.neighbors()
+                    .filter { gameState.isInBoard(it) }
+                    .map { gameState.get(it) }
+                if (neighbors.any {
+                        it.isWrapped.not() && it.isObstacle.not()
+                    }) {
+                    bfsIterator.next() // move past currentNode
+                    val neighbor = bfsIterator.next().point
+                    currentPoint.actionToGetToNeighbor(neighbor)
+                } else {
+                    val analyze = ShortestPathUsingDijkstra.analyze(gameState)
+                    val shortestPathAlgorithm = analyze(robotId, gameState)
+
+                    val pathToClosestNode: GraphPath<Node, DefaultEdge> = unwrappedGraph.vertexSet()
+                        .filter { it.point != currentNode.point }
+                        .filter { it.isWrapped.not() }
+                        .map { shortestPathAlgorithm.getPath(gameState.get(currentPoint), it) }
+                        .minBy { it.length }!!
+
+                    // pathToClosestNode.vertexList[0] is `currentNode`
+                    val nextNode = pathToClosestNode.vertexList[1]
+                    currentPoint.actionToGetToNeighbor(nextNode.point)
+                }
             }
         }
     }
