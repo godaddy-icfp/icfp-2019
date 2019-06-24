@@ -22,7 +22,7 @@ data class RobotState(
             armRelativePoints.forEach {
                 if (it.x == 1) {
                     balancePoint += it.y
-                    pointCount++;
+                    pointCount++
                 }
             }
 
