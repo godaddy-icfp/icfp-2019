@@ -44,6 +44,6 @@ data class Point(val x: Int, val y: Int) {
     }
 
     fun applyRelativePoint(offset: Point): Point {
-        return copy (x = x + offset.x, y = y + offset.y)
+        return copy(x = x + offset.x, y = y + offset.y)
     }
 }

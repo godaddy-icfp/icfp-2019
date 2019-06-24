@@ -86,7 +86,7 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
     val robot = this.robot(robotId)
     val robotPoint = robot.currentPosition
     val cells = this.cells.update(robotPoint, cells.get(robotPoint).copy(isWrapped = true, isObstacle = false))
-    val rcells = robot.armRelativePoints.fold(cells, {acc, p ->
+    val rcells = robot.armRelativePoints.fold(cells, { acc, p ->
         val newPoint = robotPoint.applyRelativePoint(p)
         if (this.isInBoard(newPoint) && cells.get(newPoint).isObstacle.not()) {
             acc.update(newPoint, cells.get(newPoint).copy(isWrapped = true))
