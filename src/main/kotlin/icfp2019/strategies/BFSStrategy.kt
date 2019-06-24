@@ -10,7 +10,6 @@ import org.jgrapht.graph.DefaultEdge
 import org.jgrapht.traverse.BreadthFirstIterator
 import org.jgrapht.traverse.GraphIterator
 
-
 fun <T> Sequence<T>.sample(count: Int): Sequence<T> = toMutableList()
     .shuffled()
     .take(count)
