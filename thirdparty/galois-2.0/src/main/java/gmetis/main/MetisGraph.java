@@ -39,13 +39,13 @@ import util.fn.LambdaVoid;
  */
 public class MetisGraph {
 
-  private GMutableInteger[] partWeights;
+  public GMutableInteger[] partWeights;
   private Accumulator mincut;
   private Accumulator numEdges;
   private MetisGraph finerGraph;
   private IntGraph<MetisNode> graph;
   private GSet<GNode<MetisNode>> boundaryNodes;
-  static int nparts;
+  public int nparts = 2;
 
   public MetisGraph() {
   	AccumulatorBuilder accuBuilder=new AccumulatorBuilder();

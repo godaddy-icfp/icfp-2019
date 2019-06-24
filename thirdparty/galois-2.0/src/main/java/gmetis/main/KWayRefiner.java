@@ -81,6 +81,7 @@ public class KWayRefiner {
 
   public void projectKWayPartition(MetisGraph metisGraph, int nparts) throws ExecutionException {
     final MetisGraph finer = metisGraph.getFinerGraph();
+    finer.nparts = nparts;
     final IntGraph<MetisNode> coarseGraph = metisGraph.getGraph();
     final IntGraph<MetisNode> graph = finer.getGraph();
     graph.map(new LambdaVoid<GNode<MetisNode>>() {

@@ -48,7 +48,7 @@ public class PMetis {
   public static void partition(MetisGraph metisGraph, int nparts) throws ExecutionException {
 
     int maxVertexWeight = (int) (1.5 * ((metisGraph.getGraph().size()) / Coarsener.COARSEN_FRACTION));
-    MetisGraph.nparts = 2;
+    metisGraph.nparts = 2;
     float[] totalPartitionWeights = new float[nparts];
     Arrays.fill(totalPartitionWeights, 1 / (float) nparts);
     metisGraph.computeAdjWgtSums();
@@ -70,7 +70,7 @@ public class PMetis {
    * of the total weight that should be assigned to it. See tpwgts in manual of metis.
    * @throws ExecutionException 
    */
-  protected void mlevelRecursiveBisection(MetisGraph metisGraph, int nparts, float[] totalPartWeights, int tpindex,
+  public void mlevelRecursiveBisection(MetisGraph metisGraph, int nparts, float[] totalPartWeights, int tpindex,
       final int partStartIndex) throws ExecutionException {
 
     IntGraph<MetisNode> graph = metisGraph.getGraph();

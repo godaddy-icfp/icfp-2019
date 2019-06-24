@@ -98,7 +98,6 @@ public class Main {
 		time = (System.nanoTime() - time) / 1000000;
 		System.err.println("coarsening time: " + time + " ms");
 
-		MetisGraph.nparts = 2;
 		float[] totalPartitionWeights = new float[nparts];
 		Arrays.fill(totalPartitionWeights, 1 / (float) nparts);
 		time = System.nanoTime();
@@ -107,7 +106,6 @@ public class Main {
 		pmetis.mlevelRecursiveBisection(mcg, nparts, totalPartitionWeights, 0, 0);
 		time = (System.nanoTime() - time) / 1000000;
 		System.err.println("initial partition time: " + time + " ms");
-		MetisGraph.nparts = nparts;
 		time = System.nanoTime();
 		Arrays.fill(totalPartitionWeights, 1 / (float) nparts);
 		KWayRefiner refiner = new KWayRefiner();
