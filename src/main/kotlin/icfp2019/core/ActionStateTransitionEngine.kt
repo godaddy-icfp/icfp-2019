@@ -94,11 +94,44 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
 
     val updatedState = withUpdatedBoardState.updateState(robotPoint, this.nodeState(robotPoint).copy(isWrapped = true))
 
-    return robot.armRelativePoints.fold(updatedState, { state, point ->
-        val newPoint = robotPoint.applyRelativePoint(point)
-        if (state.isInBoard(newPoint) && state.get(newPoint).isObstacle.not()) {
-            val boardState = state.nodeState(newPoint)
-            state.updateState(newPoint, boardState.copy(isWrapped = true))
+    fun computeClosestWallOnRobotPath(seq : IntRange): List<Pair<Int, Boolean>> {
+        return seq
+            .map { it to robotPoint.applyRelativePoint(Point(0, it)) }
+            .filter { updatedState.isInBoard(it.second) }
+            .map { it.first to updatedState.get(it.second).isObstacle }
+            .filter { it.second }
+    }
+    val closestWallOnRobotPathUp = computeClosestWallOnRobotPath(1 until 9)
+    //val closestWallOnRobotPathDown = computeClosestWallOnRobotPath(-1 downTo -9)
+
+    val maxVisibleForWallOnRobotPathUp = if (closestWallOnRobotPathUp.isEmpty()) {
+        Int.MAX_VALUE
+    } else {
+        val x = closestWallOnRobotPathUp.first().let { it.first }
+        (x * 2) - 1
+    }
+
+    /*
+    val closestWallOnArmPath = (1 until 9)
+        .map { it to robotPoint.applyRelativePoint(Point(1, it)) }
+        .map { it.first to updatedState.get(it.second).isObstacle }
+        .first { it.second }
+     */
+
+    fun isArmPointVisible(armRelativePoint: Point): Boolean {
+        //if (armRelativePoint.y > 1) {
+            val armLength = armRelativePoint.y
+            return (armLength <= maxVisibleForWallOnRobotPathUp)
+        //} else {
+
+        //}
+    }
+
+    return robot.armRelativePoints.fold(updatedState, { state, armRelativePoint ->
+        val armWorldPoint = robotPoint.applyRelativePoint(armRelativePoint)
+        if (state.isInBoard(armWorldPoint) && isArmPointVisible(armRelativePoint) && state.get(armWorldPoint).isObstacle.not()) {
+            val boardState = state.nodeState(armWorldPoint)
+            state.updateState(armWorldPoint, boardState.copy(isWrapped = true))
         } else {
             state
         }
