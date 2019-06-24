@@ -12,25 +12,23 @@ data class RobotState(
     val armRelativePoints: List<Point> = listOf(Point(1, 0), Point(1, 1), Point(1, -1))
 ) {
     fun optimumManipulatorArmTarget(): Point {
-        val cuddlePoint = Point(-1, 0)
-        if (!armRelativePoints.contains(cuddlePoint)) {
-            return cuddlePoint
-        } else {
-            // Assume all arm extensions extend the original T
-            var balancePoint = 0
-            var pointCount = 0
-            armRelativePoints.forEach {
-                if (it.x == 1) {
-                    balancePoint += it.y
-                    pointCount++
-                }
+        val areaToExtend = armRelativePoints.count() % 3
+        return when (areaToExtend) {
+            0 -> {
+                // left
+                val pointToExtend = armRelativePoints.minBy { it.x }!!
+                Point(pointToExtend.x - 1, pointToExtend.y)
             }
-
-            var point = Point(1, -(pointCount + 1) / 2)
-            if (balancePoint <= 0) {
-                point = Point(1, (pointCount + 1) / 2)
+            1 -> {
+                // down
+                val pointToExtend = armRelativePoints.minBy { it.y }!!
+                Point(pointToExtend.x, pointToExtend.y - 1)
             }
-            return point
+            else -> {
+                // up
+                val pointToExtend = armRelativePoints.maxBy { it.y }!!
+                Point(pointToExtend.x, pointToExtend.y + 1)
+            }
         }
     }
 
