@@ -112,6 +112,7 @@ internal class ActionStateTransitionEngineKtTests {
         }
     }
 
+    // THIS IS BROKEN
     @Test
     fun verifyDrill() {
 
@@ -126,9 +127,9 @@ internal class ActionStateTransitionEngineKtTests {
             Action.MoveRight, Action.StartDrill, Action.MoveRight, Action.MoveRight, Action.MoveRight
         )
         val expectedProblem = """
-        ..Xww
-        wwwww
-        ..Xww
+        ..X..
+        wwX..
+        ..X..
     """.toProblem()
 
         actions.applyTo(gameState).let { state ->
