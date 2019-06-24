@@ -16,8 +16,14 @@ data class RobotState(
         return when (areaToExtend) {
             0 -> {
                 // left
-                val pointToExtend = armRelativePoints.minBy { it.x }!!
-                Point(pointToExtend.x - 1, pointToExtend.y)
+                val cuddlePoint = Point(-1, 0)
+                if (!armRelativePoints.contains(cuddlePoint)) {
+                    // have to return this explicitly because minBy(x) would be the robot for first extra arm
+                    cuddlePoint
+                } else {
+                    val pointToExtend = armRelativePoints.minBy { it.x }!!
+                    Point(pointToExtend.x - 1, pointToExtend.y)
+                }
             }
             1 -> {
                 // down

@@ -175,7 +175,7 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
 
     return robot.armRelativePoints.fold(updatedState, { state, armRelativePoint ->
         val armWorldPoint = robotPoint.applyRelativePoint(armRelativePoint)
-        if (state.isInBoard(armWorldPoint) && isArmPointVisible(armRelativePoint) && isArmPointVisibleDueToArmPathWall(armRelativePoint) && state.get(armWorldPoint).isObstacle.not()) {
+        if (state.isInBoard(armWorldPoint) && state.get(armWorldPoint).isObstacle.not() && isArmPointVisible(armRelativePoint) && isArmPointVisibleDueToArmPathWall(armRelativePoint)) {
             val boardState = state.nodeState(armWorldPoint)
             state.updateState(armWorldPoint, boardState.copy(isWrapped = true))
         } else {
