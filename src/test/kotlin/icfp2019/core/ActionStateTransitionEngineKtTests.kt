@@ -126,9 +126,9 @@ internal class ActionStateTransitionEngineKtTests {
             Action.MoveRight, Action.StartDrill, Action.MoveRight, Action.MoveRight, Action.MoveRight
         )
         val expectedProblem = """
-        ..X..
+        ..Xww
         wwwww
-        ..X..
+        ..Xww
     """.toProblem()
 
         actions.applyTo(gameState).let { state ->
