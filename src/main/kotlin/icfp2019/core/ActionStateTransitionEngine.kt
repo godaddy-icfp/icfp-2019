@@ -94,7 +94,7 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
 
     val updatedState = withUpdatedBoardState.updateState(robotPoint, this.nodeState(robotPoint).copy(isWrapped = true))
 
-    fun computeClosestWallOnRobotPath(seq : IntRange): List<Pair<Int, Boolean>> {
+    fun computeClosestWallOnRobotPath(seq: IntProgression): List<Pair<Int, Boolean>> {
         return seq
             .map { it to robotPoint.applyRelativePoint(Point(0, it)) }
             .filter { updatedState.isInBoard(it.second) }
@@ -102,13 +102,20 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
             .filter { it.second }
     }
     val closestWallOnRobotPathUp = computeClosestWallOnRobotPath(1 until 9)
-    //val closestWallOnRobotPathDown = computeClosestWallOnRobotPath(-1 downTo -9)
+    val closestWallOnRobotPathDown = computeClosestWallOnRobotPath(-1 downTo -9)
 
     val maxVisibleForWallOnRobotPathUp = if (closestWallOnRobotPathUp.isEmpty()) {
         Int.MAX_VALUE
     } else {
         val x = closestWallOnRobotPathUp.first().let { it.first }
         (x * 2) - 1
+    }
+
+    val maxVisibleForWallOnRobotPathDown = if (closestWallOnRobotPathDown.isEmpty()) {
+        Int.MAX_VALUE
+    } else {
+        val x = closestWallOnRobotPathDown.first().let { it.first }
+        (x * -2) - 1
     }
 
     /*
@@ -119,12 +126,15 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
      */
 
     fun isArmPointVisible(armRelativePoint: Point): Boolean {
-        //if (armRelativePoint.y > 1) {
+        if (armRelativePoint.y > 1) {
             val armLength = armRelativePoint.y
             return (armLength <= maxVisibleForWallOnRobotPathUp)
-        //} else {
-
-        //}
+        } else if (armRelativePoint.y < 0) {
+            val armLength = armRelativePoint.y * -1
+            return (armLength <= maxVisibleForWallOnRobotPathDown)
+        } else {
+            return true
+        }
     }
 
     return robot.armRelativePoints.fold(updatedState, { state, armRelativePoint ->
