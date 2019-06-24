@@ -55,7 +55,7 @@ private fun GameState.move(robotId: RobotId, mover: (Point) -> Point): GameState
 
     val movedState = (0 until distance).fold(this) { state, _ ->
         val newPosition = mover(state.robot(robotId).currentPosition)
-        if (!state.isInBoard(newPosition)) {
+        if (!state.isInBoard(newPosition) || state.get(newPosition).isObstacle) {
             state
         } else {
             state.updateRobot(robotId) { copy(currentPosition = newPosition) }
