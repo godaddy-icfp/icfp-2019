@@ -1,9 +1,5 @@
 package icfp2019.model
 
-<<<<<<< HEAD
-=======
-import icfp2019.core.ActionStateTransitionEngineKtTests
->>>>>>> 85f1fceaf56c010818e100ea9ff8d9d5cb328844
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

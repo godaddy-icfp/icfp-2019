@@ -28,8 +28,7 @@ object BFSStrategy : Strategy {
                         graph.vertexSet().filter { it.point in unWrappedPoints }.plus(currentNode).toSet()
                     )
 
-                val bfsIterator: GraphIterator<BoardCell, DefaultEdge> =
-                    BreadthFirstIterator(unwrappedGraph, currentNode)
+                val bfsIterator: GraphIterator<BoardCell, DefaultEdge> = BreadthFirstIterator(unwrappedGraph, currentNode)
 
                 val neighbors = currentNode.point.neighbors()
                     .filter { gameState.isInBoard(it) }
@@ -49,6 +48,7 @@ object BFSStrategy : Strategy {
                         .filter { it.point in unWrappedPoints }
                         .map { shortestPathAlgorithm.getPath(gameState.get(currentPoint), it) }
                         .minBy { it.length }!!
+
                     // pathToClosestNode.vertexList[0] is `currentNode`
                     val nextNode = pathToClosestNode.vertexList[1]
                     currentPoint.actionToGetToNeighbor(nextNode.point)
