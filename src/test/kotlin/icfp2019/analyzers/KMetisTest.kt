@@ -2,10 +2,8 @@ package icfp2019.analyzers
 
 import icfp2019.loadProblem
 import icfp2019.model.GameState
-import icfp2019.model.Point
 import icfp2019.model.RobotId
 import icfp2019.parseDesc
-import icfp2019.printBoard
 import kMetis
 import org.junit.jupiter.api.Test
 
