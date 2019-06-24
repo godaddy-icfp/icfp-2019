@@ -33,6 +33,8 @@ fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameSta
                 get(currentPosition).copy(hasTeleporterPlanted = true)
             ).useBoosterFromState(Booster.Teleporter)
 
+            Action.CloneRobot -> withNewRobot()
+
             is Action.TeleportBack -> updateRobot(robotId) {
                 copy(currentPosition = action.targetResetPoint)
             }
@@ -40,11 +42,6 @@ fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameSta
             is Action.AttachManipulator -> updateRobot(robotId) {
                 copy(armRelativePoints = armRelativePoints.plus(action.point))
             }.useBoosterFromState(Booster.ExtraArm)
-            Action.PlantTeleportResetPoint -> updateBoard(
-                currentPosition,
-                get(currentPosition).copy(hasTeleporterPlanted = true)
-            ).useBoosterFromState(Booster.Teleporter)
-            Action.CloneRobot -> withNewRobot()
         }
     }
 }
@@ -54,13 +51,13 @@ private fun GameState.move(robotId: RobotId, mover: (Point) -> Point): GameState
 
     val distance = if (robotState.hasActiveFastWheels()) 2 else 1
 
-    return (0 until distance).fold(this) { state, _ ->
-        val newPosition = mover.invoke(state.robot(robotId).currentPosition)
-        state.updateRobot(robotId) {
-            copy(currentPosition = newPosition)
-        }.let { it.wrapAffectedCells(robotId) }
-            .let { it.addBoosterToState(newPosition) }
-    }.updateRobot(robotId) {
+    val movedState = (0 until distance).fold(this) { state, _ ->
+        val newPosition = mover(state.robot(robotId).currentPosition)
+        state.updateRobot(robotId) { copy(currentPosition = newPosition) }
+            .wrapAffectedCells(robotId)
+            .addBoosterToState(newPosition)
+    }
+    return movedState.updateRobot(robotId) {
         copy(
             remainingFastWheelTime = if (robotState.hasActiveFastWheels()) robotState.remainingFastWheelTime - 1 else 0,
             remainingDrillTime = if (robotState.hasActiveDrill()) robotState.remainingDrillTime - 1 else 0
@@ -99,9 +96,9 @@ private fun GameState.wrapAffectedCells(robotId: RobotId): GameState {
 
     return robot.armRelativePoints.fold(updatedState, { state, point ->
         val newPoint = robotPoint.applyRelativePoint(point)
-        val boardState = updatedState.nodeState(newPoint)
-        if (updatedState.isInBoard(newPoint) && updatedState.get(newPoint).isObstacle.not()) {
-            state.updateState(robotPoint, boardState.copy(isWrapped = true))
+        if (state.isInBoard(newPoint) && state.get(newPoint).isObstacle.not()) {
+            val boardState = state.nodeState(newPoint)
+            state.updateState(newPoint, boardState.copy(isWrapped = true))
         } else {
             state
         }

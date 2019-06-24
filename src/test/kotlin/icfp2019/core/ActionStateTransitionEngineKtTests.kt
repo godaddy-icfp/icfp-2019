@@ -189,6 +189,7 @@ internal class ActionStateTransitionEngineKtTests {
     """.toProblem()
 
         actions.applyTo(gameState).let {
+            printBoard(gameState)
             Assertions.assertEquals(expectedProblem.map, it.toProblem().map)
         }
     }

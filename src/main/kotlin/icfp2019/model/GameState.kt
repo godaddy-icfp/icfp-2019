@@ -118,15 +118,15 @@ data class GameState private constructor(
         return withRobotState(robotId, robot(robotId).copy(currentPosition = point))
     }
 
+    fun withRobotState(robotId: RobotId, robotState: RobotState): GameState {
+        return copy(robotStates = robotStates.plus(robotId to robotState))
+    }
+
     fun robot(robotId: RobotId): RobotState {
         return this.robotStates.getValue(robotId)
     }
 
     fun boostersAvailable(booster: Booster): Int {
         return this.unusedBoosters.getOrDefault(booster, 0)
-    }
-
-    fun withRobotState(robotId: RobotId, robotState: RobotState): GameState {
-        return copy(robotStates = robotStates.plus(robotId to robotState))
     }
 }
