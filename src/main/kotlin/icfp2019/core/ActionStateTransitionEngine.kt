@@ -14,10 +14,12 @@ fun applyAction(gameState: GameState, robotId: RobotId, action: Action): GameSta
 
             Action.TurnClockwise -> updateRobot(robotId) {
                 copy(orientation = orientation.turnClockwise())
+                copy(armRelativePoints = gameState.robot(robotId).turnClockwise())
             }
 
             Action.TurnCounterClockwise -> updateRobot(robotId) {
                 copy(orientation = orientation.turnCounterClockwise())
+                copy(armRelativePoints = gameState.robot(robotId).turnCounterClockwise())
             }
 
             Action.AttachFastWheels -> updateRobot(robotId) {
@@ -53,9 +55,13 @@ private fun GameState.move(robotId: RobotId, mover: (Point) -> Point): GameState
 
     val movedState = (0 until distance).fold(this) { state, _ ->
         val newPosition = mover(state.robot(robotId).currentPosition)
-        state.updateRobot(robotId) { copy(currentPosition = newPosition) }
-            .wrapAffectedCells(robotId)
-            .addBoosterToState(newPosition)
+        if (!state.isInBoard(newPosition)) {
+            state
+        } else {
+            state.updateRobot(robotId) { copy(currentPosition = newPosition) }
+                .wrapAffectedCells(robotId)
+                .addBoosterToState(newPosition)
+        }
     }
     return movedState.updateRobot(robotId) {
         copy(
