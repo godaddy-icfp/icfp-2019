@@ -63,4 +63,5 @@ tasks.register<Zip>("packageDistribution") {
 
     from("problems")
     include("*.sol")
+
 }
