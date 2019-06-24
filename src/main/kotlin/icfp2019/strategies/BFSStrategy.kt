@@ -14,7 +14,7 @@ object BFSStrategy : Strategy {
     override fun compute(initialState: GameState): (robotId: RobotId, state: GameState) -> Action {
         val graphBuilder = BoardCellsGraphAnalyzer.analyze(initialState)
         return { robotId, gameState ->
-            if (gameState.boostersAvailable(Booster.ExtraArm) > 0) {
+            if (gameState.boardState().boostersAvailable(Booster.ExtraArm) > 0) {
                 Action.AttachManipulator(gameState.robot(robotId).optimumManipulatorArmTarget())
             } else {
                 val currentPoint = gameState.robotState.values.first().currentPosition
